@@ -57,7 +57,7 @@ Para ejecutar el proyecto se necesita:
 
 Para instalar el proyecto, sigue estos pasos:
 
-- Clona el repositorio en tu máquina local con el comando `git clone https://github.com/nereasuarez/adivina-la-palabra.git`
+- Clona el repositorio en tu máquina local con el comando `git clone https://github.com/EnriqueBoronatSopra/AdivinaLaPalabra-Back-.git`
 - Abre el proyecto con tu IDE y espera a que se resuelvan las dependencias de Maven
 - Ejecuta la clase `AdivinaLaPalabraApplication.java` como una aplicación de Spring Boot
 
