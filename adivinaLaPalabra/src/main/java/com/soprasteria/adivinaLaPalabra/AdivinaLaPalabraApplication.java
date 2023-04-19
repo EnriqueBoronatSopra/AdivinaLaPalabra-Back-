@@ -9,5 +9,4 @@ public class AdivinaLaPalabraApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AdivinaLaPalabraApplication.class, args);
 	}
-
 }
