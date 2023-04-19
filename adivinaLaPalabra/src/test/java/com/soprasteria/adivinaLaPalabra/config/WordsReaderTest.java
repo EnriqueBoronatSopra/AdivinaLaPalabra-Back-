@@ -2,6 +2,7 @@ package com.soprasteria.adivinaLaPalabra.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -12,8 +13,8 @@ class WordsReaderTest {
     private WordsReader wordsReader;
 
     @BeforeEach
-    public void setup() {
-        wordsReader = WordsReader.getInstance();
+    void setup() {
+        wordsReader = new WordsReader();
     }
 
     @Test
@@ -30,14 +31,6 @@ class WordsReaderTest {
         boolean result = wordsReader.checkWord(firstWord);
 
         assertFalse(result);
-    }
-
-    @Test
-    void testGetInstanceReturnTheSameInstanceOfTheObject() {
-        WordsReader instance1 = WordsReader.getInstance();
-        WordsReader instance2 = WordsReader.getInstance();
-
-        assertSame(instance1, instance2);
     }
 
     @Test

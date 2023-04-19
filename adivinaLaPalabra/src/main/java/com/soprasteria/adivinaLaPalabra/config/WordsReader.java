@@ -2,7 +2,6 @@ package com.soprasteria.adivinaLaPalabra.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -10,17 +9,9 @@ import java.util.List;
 @Component
 public class WordsReader {
     private List<String> words;
-    private static WordsReader wordsReaderInstance;
 
-    private WordsReader() {
+    public WordsReader() {
         convertJsonToList();
-    }
-
-    public static WordsReader getInstance() {
-        if (wordsReaderInstance == null) {
-            wordsReaderInstance = new WordsReader();
-        }
-        return wordsReaderInstance;
     }
 
     private void convertJsonToList() {
