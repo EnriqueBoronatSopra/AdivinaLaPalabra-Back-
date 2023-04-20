@@ -2,7 +2,6 @@ package com.soprasteria.adivinaLaPalabra.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ class WordsReaderTest {
 
     @Test
     void testConvertJsonToList() {
-        List<String> words = wordsReader.getWords();
+        List<String> words = wordsReader.getDictionary();
         assertNotNull(words);
     }
 }
