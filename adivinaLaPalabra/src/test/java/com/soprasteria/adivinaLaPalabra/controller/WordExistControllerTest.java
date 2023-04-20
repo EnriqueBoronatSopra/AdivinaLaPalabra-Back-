@@ -30,9 +30,7 @@ class WordExistControllerTest {
     @Test
     void getWordTest() throws Exception {
         final String word = "abaca";
-
         when(wordExistService.existWordOrNot(word)).thenReturn(true);
-
         this.mockMvc.perform(MockMvcRequestBuilders.get("/checkWord").param("word", word))
                 .andExpect(status().isOk());
     }
