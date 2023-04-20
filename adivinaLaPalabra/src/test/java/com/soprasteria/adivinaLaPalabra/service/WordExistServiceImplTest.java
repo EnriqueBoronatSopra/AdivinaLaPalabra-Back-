@@ -17,7 +17,7 @@ class WordExistServiceImplTest {
     private WordsReader wordsReaderMock;
 
     @InjectMocks
-    WordExistServiceImpl wordExistService;
+    private WordExistServiceImpl wordExistService;
 
     @BeforeEach
     void setup(){
@@ -25,18 +25,18 @@ class WordExistServiceImplTest {
     }
 
     @Test
-    void checkIfWordExistServiceReturnTrueWhenWordExist() {
+    void returnTrueIfWordExist() {
         final String WORD1 = "abaca";
         when(wordsReaderMock.checkWord(WORD1)).thenReturn(true);
-        boolean expectedResult = wordExistService.existWordOrNot(WORD1);
+        boolean expectedResult = wordExistService.checkWord(WORD1);
         assertTrue(expectedResult);
     }
 
     @Test
-    void checkIfWordExistServiceReturnTrueWhenWordNotExist() {
+    void returnFalseIfWordNotExist() {
         final String WORD2 = "fsofb";
         when(wordsReaderMock.checkWord(WORD2)).thenReturn(false);
-        boolean expectedResult = wordExistService.existWordOrNot(WORD2);
+        boolean expectedResult = wordExistService.checkWord(WORD2);
         assertFalse(expectedResult);
     }
 

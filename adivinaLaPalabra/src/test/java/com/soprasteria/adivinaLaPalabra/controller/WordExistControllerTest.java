@@ -22,16 +22,16 @@ class WordExistControllerTest {
 
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockBean
-    WordExistServiceImpl wordExistService;
+    private WordExistServiceImpl wordExistService;
 
     @Test
     void getWordTest() throws Exception {
         final String word = "abaca";
-        when(wordExistService.existWordOrNot(word)).thenReturn(true);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/checkWord").param("word", word))
+        when(wordExistService.checkWord(word)).thenReturn(true);
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/words/exist").param("word", word))
                 .andExpect(status().isOk());
     }
 }

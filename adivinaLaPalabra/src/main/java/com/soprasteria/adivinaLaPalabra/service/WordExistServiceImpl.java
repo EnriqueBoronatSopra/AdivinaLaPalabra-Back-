@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 public class WordExistServiceImpl  implements WordExistService {
 
     @Autowired
-    WordsReader wordsReader;
+    private WordsReader wordsReader;
 
     @Override
-    public boolean existWordOrNot(String word) {
+    public boolean checkWord(String word) {
         return wordsReader.checkWord(word);
     }
 }
