@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class WordsReader {
@@ -32,5 +33,11 @@ public class WordsReader {
 
     public List<String> getWords() {
         return words;
+    }
+
+    public String getRandomWord() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(words.size());
+        return words.get(randomIndex);
     }
 }
