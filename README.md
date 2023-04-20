@@ -43,7 +43,7 @@ Este repositorio contiene el código del back-end del juego, desarrollado con Ja
 
 ## Desarrolladores
 
-Este repositorio ha sido realizado por Nerea Suárez y Enrique Boronat, como parte del dev team encargado del Back-End del proyecto.
+Este repositorio ha sido realizado por Nerea Balibrea y Enrique Boronat, como parte del dev team encargado del Back-End del proyecto.
 
 ## Requisitos
 
