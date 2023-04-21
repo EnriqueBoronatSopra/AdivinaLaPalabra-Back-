@@ -1,6 +1,7 @@
 package com.soprasteria.adivinaLaPalabra.service;
 
 import com.soprasteria.adivinaLaPalabra.config.WordsReader;
+import com.soprasteria.adivinaLaPalabra.dto.WordResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,10 @@ public class WordExistServiceImpl  implements WordExistService {
     private WordsReader wordsReader;
 
     @Override
-    public boolean checkWord(String word) {
-        return wordsReader.checkWord(word);
+    public WordResponse checkWord(String word) {
+        String lowerCaseWord = word.toLowerCase();
+        boolean wordExist = wordsReader.checkWord(lowerCaseWord);
+
+        return new WordResponse(wordExist);
     }
 }
