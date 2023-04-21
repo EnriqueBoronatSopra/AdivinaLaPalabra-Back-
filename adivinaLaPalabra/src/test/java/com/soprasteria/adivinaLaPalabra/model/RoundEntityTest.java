@@ -5,14 +5,14 @@ import org.mockito.InjectMocks;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RoundTest {
+class RoundEntityTest {
     @InjectMocks
-    private Round round;
+    private RoundEntity roundEntity;
 
     @Test
     void checkThatIdIsNotNull() {
-        round = new Round("araba");
-        assertNotNull(round.getId());
+        roundEntity = new RoundEntity("araba");
+        assertNotNull(roundEntity.getId());
     }
 
 }
