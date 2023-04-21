@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -26,10 +27,11 @@ class WordExistControllerTest {
     private WordExistServiceImpl wordExistService;
 
     @Test
-    void getWordTest() throws Exception {
+    void getExistWordTest() throws Exception {
         final String word = "abaca";
         when(wordExistService.checkWord(word)).thenReturn(true);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/words/exist").param("word", word))
+        this.mockMvc.perform(get("/words/exist").param("word", word))
                 .andExpect(status().isOk());
     }
+
 }
