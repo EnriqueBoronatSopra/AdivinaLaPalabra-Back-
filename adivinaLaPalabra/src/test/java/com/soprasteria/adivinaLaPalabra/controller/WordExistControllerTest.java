@@ -1,5 +1,6 @@
 package com.soprasteria.adivinaLaPalabra.controller;
 
+import com.soprasteria.adivinaLaPalabra.dto.WordExistResponse;
 import com.soprasteria.adivinaLaPalabra.service.WordExistServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +30,7 @@ class WordExistControllerTest {
     @Test
     void getExistWordTest() throws Exception {
         final String word = "abaca";
-        when(wordExistService.checkWord(word)).thenReturn(true);
+        when(wordExistService.checkWord(word)).thenReturn(new WordExistResponse(true));
         this.mockMvc.perform(get("/words/exist").param("word", word))
                 .andExpect(status().isOk());
     }

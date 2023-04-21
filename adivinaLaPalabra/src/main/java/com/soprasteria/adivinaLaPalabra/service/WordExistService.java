@@ -1,6 +1,8 @@
 package com.soprasteria.adivinaLaPalabra.service;
 
 
+import com.soprasteria.adivinaLaPalabra.dto.WordExistResponse;
+
 public interface WordExistService {
-    boolean checkWord(String word);
+    WordExistResponse checkWord(String word);
 }

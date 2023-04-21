@@ -1,6 +1,7 @@
 package com.soprasteria.adivinaLaPalabra.service;
 
 import com.soprasteria.adivinaLaPalabra.config.WordsReader;
+import com.soprasteria.adivinaLaPalabra.dto.WordExistResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -28,7 +29,8 @@ class WordExistServiceImplTest {
     void returnTrueIfWordExist() {
         final String WORD1 = "abaca";
         when(wordsReaderMock.checkWord(WORD1)).thenReturn(true);
-        boolean expectedResult = wordExistService.checkWord(WORD1);
+        WordExistResponse wordExistResponse = wordExistService.checkWord(WORD1);
+        boolean expectedResult = wordExistResponse.isWordExists();
         assertTrue(expectedResult);
     }
 
@@ -36,7 +38,8 @@ class WordExistServiceImplTest {
     void returnFalseIfWordNotExist() {
         final String WORD2 = "fsofb";
         when(wordsReaderMock.checkWord(WORD2)).thenReturn(false);
-        boolean expectedResult = wordExistService.checkWord(WORD2);
+        WordExistResponse wordExistResponse = wordExistService.checkWord(WORD2);
+        boolean expectedResult = wordExistResponse.isWordExists();
         assertFalse(expectedResult);
     }
 
