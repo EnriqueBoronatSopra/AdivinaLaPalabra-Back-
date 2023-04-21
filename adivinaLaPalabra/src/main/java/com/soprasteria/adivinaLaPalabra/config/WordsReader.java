@@ -5,10 +5,11 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class WordsReader {
-    private List<String> words;
+    private List<String> dictionary;
 
     public WordsReader() {
         convertJsonToList();
@@ -17,7 +18,7 @@ public class WordsReader {
     private void convertJsonToList() {
         ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = getClass().getResourceAsStream("/dictionary.json")) {
-            words = objectMapper.readValue(
+            dictionary = objectMapper.readValue(
                     inputStream,
                     objectMapper.getTypeFactory().constructCollectionType(List.class, String.class)
             );
@@ -27,10 +28,18 @@ public class WordsReader {
     }
 
     public boolean checkWord(String word) {
-        return words.contains(word);
+        return dictionary.contains(word);
     }
 
-    public List<String> getWords() {
-        return words;
+    public List<String> getDictionary() {
+        return dictionary;
+    }
+
+    public String getRandomWord() {
+        Random random = new Random();
+        int dictionarySize = dictionary.size();
+        int randomIndex = random.nextInt(dictionarySize);
+
+        return dictionary.get(randomIndex);
     }
 }

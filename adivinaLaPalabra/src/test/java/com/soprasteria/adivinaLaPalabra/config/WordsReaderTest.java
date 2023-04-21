@@ -2,7 +2,6 @@ package com.soprasteria.adivinaLaPalabra.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ class WordsReaderTest {
     }
 
     @Test
-    void testWordExistReturnTrueWhenTheWordIsInDictionary() {
+    void testReturnTrueIfWordExist() {
         final String firstWord = "zuzon";
         boolean result = wordsReader.checkWord(firstWord);
 
@@ -26,7 +25,7 @@ class WordsReaderTest {
     }
 
     @Test
-    void testWordExistReturnFalseWhenTheWordNotIsInDictionary() {
+    void testReturnFalseIfWordNotExist() {
         final String firstWord = "aeiou";
         boolean result = wordsReader.checkWord(firstWord);
 
@@ -35,7 +34,15 @@ class WordsReaderTest {
 
     @Test
     void testConvertJsonToList() {
-        List<String> words = wordsReader.getWords();
+        List<String> words = wordsReader.getDictionary();
         assertNotNull(words);
     }
+
+    @Test
+    void testRandomWordReturnNotNull() {
+        String randomWord = wordsReader.getRandomWord();
+
+        assertNotNull(randomWord);
+    }
+
 }
