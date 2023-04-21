@@ -3,10 +3,10 @@ package com.soprasteria.adivinaLaPalabra.dto;
 import lombok.Data;
 
 @Data
-public class WordExistResponse {
+public class WordResponse {
     private boolean wordExists;
 
-    public WordExistResponse(boolean wordExists) {
+    public WordResponse(boolean wordExists) {
         this.wordExists = wordExists;
     }
 }
