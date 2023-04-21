@@ -43,7 +43,7 @@ Este repositorio contiene el código del back-end del juego, desarrollado con Ja
 
 ## Desarrolladores
 
-Este repositorio ha sido realizado por Nerea Suárez y Enrique Boronat, como parte del dev team encargado del Back-End del proyecto.
+Este repositorio ha sido realizado por Nerea Balibrea y Enrique Boronat, como parte del dev team encargado del Back-End del proyecto.
 
 ## Requisitos
 
@@ -81,6 +81,6 @@ Este proyecto es privado y no acepta contribuciones externas. Si eres uno de los
 
 Si tienes alguna duda o sugerencia sobre el proyecto, puedes contactar con los desarrolladores mediante sus correos electrónicos:
 
-- Nerea Suárez: nerea.balibrea@ext.soprasteria.com
+- Nerea Balibrea: nerea.balibrea@ext.soprasteria.com
 - Enrique Boronat: ej.boronat@ext.soprasteria.com
 
