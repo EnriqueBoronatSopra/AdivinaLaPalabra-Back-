@@ -1,28 +1,5 @@
 # Adivina la palabra
 
-
-Adivina la palabra es un juego similar a Wordle, en el que el jugador debe adivinar una palabra secreta de cinco letras en seis intentos. El jugador introduce una palabra y recibe una retroalimentación de cuántas letras coinciden con la palabra secreta y en qué posición. El juego se puede jugar en modo individual o multijugador, con la opción de crear salas privadas o públicas.
-
-Este repositorio contiene el código del back-end del juego, desarrollado con Java y Spring Boot. El back-end se encarga de gestionar la lógica del juego, la base de datos de palabras y usuarios, y la comunicación con el front-end mediante una API REST.
-
-
-
-## Requisitos
-
-Para ejecutar el proyecto se necesita:
-
-- Java 11 o superior
-- Maven
-- MySQL
-
-## Instalación
-
-Para instalar el proyecto, sigue estos pasos:
-
-1. Clona el repositorio en tu máquina local:
-
-# Adivina la palabra
-
 Adivina la palabra es un juego similar a Wordle, en el que el jugador tiene que adivinar una palabra secreta de cinco letras en cinco intentos. El juego le da pistas al jugador sobre si las letras que ha introducido son correctas, incorrectas o están en la posición equivocada.
 
 Este repositorio contiene el código del back-end del juego, desarrollado con Java y Spring Boot. El back-end se encarga de generar las palabras secretas, validar las entradas del jugador y enviar las respuestas al front-end.
