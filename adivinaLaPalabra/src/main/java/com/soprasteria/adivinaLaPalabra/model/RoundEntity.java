@@ -1,20 +1,16 @@
 package com.soprasteria.adivinaLaPalabra.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.UUID;
 @Data
 @Entity
 @Table(name = "round")
 public class RoundEntity {
 
     @Id
-    @GeneratedValue
-    private final Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String word;
 
 }

@@ -9,6 +9,7 @@ import java.util.Random;
 
 @Component
 public class WordsReader {
+
     private List<String> dictionary;
 
     public WordsReader() {
