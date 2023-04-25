@@ -6,6 +6,5 @@ import java.util.UUID;
 
 @Data
 public class RoundResponse {
-    private UUID id;
-    private String message;
+    private Long id;
 }
