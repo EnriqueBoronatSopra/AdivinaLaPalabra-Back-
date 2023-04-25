@@ -39,7 +39,7 @@ class ApiRestControllerTest {
     void getExistWordTest() throws Exception {
         final String word = "abaca";
         when(wordExistService.checkWord(word)).thenReturn(new WordResponse(true));
-        this.mockMvc.perform(get("/words/exist").param("word", word))
+        this.mockMvc.perform(get("/rounds/check-word").param("word", word))
                 .andExpect(status().isOk());
     }
 
@@ -47,7 +47,7 @@ class ApiRestControllerTest {
     void getNotExistWordTest() throws Exception {
         final String word = "abaca";
         when(wordExistService.checkWord(word)).thenReturn(new WordResponse(false));
-        this.mockMvc.perform(get("/words/exist").param("word", word))
+        this.mockMvc.perform(get("/rounds/check-word").param("word", word))
                 .andExpect(status().isNotFound());
     }
 
@@ -57,7 +57,7 @@ class ApiRestControllerTest {
         final Long id = 3L;
         roundResponseExpected.setId(id);
         when(roundService.newRound()).thenReturn(roundResponseExpected);
-        this.mockMvc.perform(post("/rounds/new-round")).andExpect(status().isOk());
+        this.mockMvc.perform(post("/rounds")).andExpect(status().isOk());
     }
 
 }
