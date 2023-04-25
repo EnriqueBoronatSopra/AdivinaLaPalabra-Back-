@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoundEntityRepository extends JpaRepository<RoundEntity, Long> {
+public interface RoundRepository extends JpaRepository<RoundEntity, Long> {
 }

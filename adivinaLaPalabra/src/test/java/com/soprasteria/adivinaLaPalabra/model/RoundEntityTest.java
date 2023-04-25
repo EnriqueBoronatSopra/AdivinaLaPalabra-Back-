@@ -1,6 +1,6 @@
 package com.soprasteria.adivinaLaPalabra.model;
 
-import com.soprasteria.adivinaLaPalabra.repository.RoundEntityRepository;
+import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 class RoundEntityTest {
 
     @Mock
-    private RoundEntityRepository roundEntityRepository;
+    private RoundRepository roundRepository;
 
     private RoundEntity roundEntity;
 
@@ -21,12 +21,12 @@ class RoundEntityTest {
         MockitoAnnotations.openMocks(this);
         RoundEntity roundEntitySaved = new RoundEntity();
         roundEntitySaved.setId(3L);
-        when(roundEntityRepository.save(roundEntity)).thenReturn(roundEntitySaved);
+        when(roundRepository.save(roundEntity)).thenReturn(roundEntitySaved);
     }
 
     @Test
     void checkThatIdIsNotNull() {
-        RoundEntity roundEntityExpected = roundEntityRepository.save(roundEntity);
+        RoundEntity roundEntityExpected = roundRepository.save(roundEntity);
         assertNotNull(roundEntityExpected.getId());
     }
 

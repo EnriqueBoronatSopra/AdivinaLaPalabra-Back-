@@ -3,7 +3,7 @@ package com.soprasteria.adivinaLaPalabra.service;
 import com.soprasteria.adivinaLaPalabra.config.WordsReader;
 import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
 import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
-import com.soprasteria.adivinaLaPalabra.repository.RoundEntityRepository;
+import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class RoundServiceImpl implements RoundService {
     WordsReader wordsReader;
 
     @Autowired
-    RoundEntityRepository roundEntityRepository;
+    RoundRepository roundRepository;
 
     @Override
     public RoundResponse newRound() {
@@ -27,7 +27,7 @@ public class RoundServiceImpl implements RoundService {
         roundEntity.setWord(wordToGuess);
 
         try {
-            RoundEntity savedRoundEntity = roundEntityRepository.save(roundEntity);
+            RoundEntity savedRoundEntity = roundRepository.save(roundEntity);
             Long idRoundSaved = savedRoundEntity.getId();
             RoundResponse roundResponse = new RoundResponse();
             roundResponse.setId(idRoundSaved);
