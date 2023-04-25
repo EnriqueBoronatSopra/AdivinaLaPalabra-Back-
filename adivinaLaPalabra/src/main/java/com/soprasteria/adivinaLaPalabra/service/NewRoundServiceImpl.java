@@ -22,11 +22,10 @@ public class NewRoundServiceImpl implements INewRoundService {
         RoundResponse roundResponse = null;
 
         RoundEntity roundEntity = new RoundEntity();
-        RoundEntity savedRoundEntity;
         roundEntity.setWord(wordToGuess);
 
         try {
-            savedRoundEntity = roundEntityRepository.save(roundEntity);
+            RoundEntity savedRoundEntity = roundEntityRepository.save(roundEntity);
             roundResponse = new RoundResponse();
             Long idRoundSaved = savedRoundEntity.getId();
             roundResponse.setId(idRoundSaved);
