@@ -3,7 +3,7 @@ package com.soprasteria.adivinaLaPalabra.service;
 import com.soprasteria.adivinaLaPalabra.config.WordsReader;
 import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
 import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
-import com.soprasteria.adivinaLaPalabra.repository.IRoundEntityRepository;
+import com.soprasteria.adivinaLaPalabra.repository.RoundEntityRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,15 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class NewRoundServiceImplTest {
+class RoundServiceImplTest {
     @Mock
-    private IRoundEntityRepository roundEntityRepository;
+    private RoundEntityRepository roundEntityRepository;
 
     @Mock
-    WordsReader wordsReader;
+    private WordsReader wordsReader;
 
     @InjectMocks
-    NewRoundServiceImpl newRoundService;
+    private RoundServiceImpl newRoundService;
 
     @BeforeEach
     void setup() {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/words")
 public class WordExistController {
+
     @Autowired
     private WordExistServiceImpl wordService;
 

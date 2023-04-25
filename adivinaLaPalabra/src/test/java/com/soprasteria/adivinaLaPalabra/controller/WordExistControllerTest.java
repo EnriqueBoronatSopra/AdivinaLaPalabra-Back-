@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = Controller.class)
 class WordExistControllerTest {
 
-
     @Autowired
     private MockMvc mockMvc;
 

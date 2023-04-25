@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class WordResponse {
+
     private boolean wordExists;
 
     public WordResponse(boolean wordExists) {
