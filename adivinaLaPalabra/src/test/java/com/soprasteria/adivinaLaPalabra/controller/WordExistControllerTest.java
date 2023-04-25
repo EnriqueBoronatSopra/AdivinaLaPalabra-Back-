@@ -1,44 +1,51 @@
 package com.soprasteria.adivinaLaPalabra.controller;
 
+import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
 import com.soprasteria.adivinaLaPalabra.dto.WordResponse;
 import com.soprasteria.adivinaLaPalabra.service.WordExistServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.stereotype.Controller;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = Controller.class)
 class WordExistControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private WordExistServiceImpl wordExistService;
 
+    @InjectMocks
+    private WordExistController wordExistController;
+
     @Test
-    void getExistWordTest() throws Exception {
-        final String word = "abaca";
-        when(wordExistService.checkWord(word)).thenReturn(new WordResponse(true));
-        this.mockMvc.perform(get("/words/exist").param("word", word))
-                .andExpect(status().isOk());
+    void returnFalseIsNotWord() {
+        final String word = "word";
+        WordResponse wordResponse = new WordResponse(false);
+        when(wordExistService.checkWord(any())).thenReturn(wordResponse);
+
+        ResponseEntity<WordResponse> responseEntityExpected = new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+
+        assertEquals(responseEntityExpected, wordExistController.wordExist(word));
     }
 
     @Test
-    void getNotExistWordTest() throws Exception {
-        final String word = "abaca";
-        when(wordExistService.checkWord(word)).thenReturn(new WordResponse(false));
-        this.mockMvc.perform(get("/words/exist").param("word", word))
-                .andExpect(status().isNotFound());
+    void returnTrueIsWord() {
+        final String word = "word";
+        WordResponse wordResponse = new WordResponse(true);
+        when(wordExistService.checkWord(any())).thenReturn(wordResponse);
+
+        ResponseEntity<WordResponse> responseEntityExpected = ResponseEntity.ok(wordResponse);
+
+        assertEquals(responseEntityExpected, wordExistController.wordExist(word));
     }
+
 
 }
