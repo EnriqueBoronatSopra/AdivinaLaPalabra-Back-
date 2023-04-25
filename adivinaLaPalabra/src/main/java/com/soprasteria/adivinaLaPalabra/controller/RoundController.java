@@ -19,7 +19,7 @@ public class RoundController {
     @Autowired
     private RoundServiceImpl roundService;
 
-    @PostMapping("/new-round")
+    @PostMapping
     public ResponseEntity<RoundResponse> newRound() {
         RoundResponse roundResponse = roundService.newRound();
         return roundResponse != null ? ResponseEntity.ok(roundResponse) :
