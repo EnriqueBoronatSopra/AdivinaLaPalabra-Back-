@@ -13,8 +13,8 @@ public class CheckHitsTest {
         final String secretWord = "queso";
         final String intentWord = "queso";
 
-        List<PositionAtIntentWord> hitList = Utils.checkHits(secretWord, intentWord);
-        long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionAtIntentWord.HIT))
+        List<PositionOfIntent> hitList = Utils.checkHits(secretWord, intentWord);
+        long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionOfIntent.HIT))
                                     .count();
         long hitsExpected = secretWord.length();
 
@@ -26,8 +26,8 @@ public class CheckHitsTest {
         final String secretWord = "queso";
         final String intentWord = "abaca";
 
-        List<PositionAtIntentWord> hitList = Utils.checkHits(secretWord, intentWord);
-        long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionAtIntentWord.HIT))
+        List<PositionOfIntent> hitList = Utils.checkHits(secretWord, intentWord);
+        long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionOfIntent.HIT))
                 .count();
         long hitsExpected = 0L;
 
@@ -39,9 +39,9 @@ public class CheckHitsTest {
         final String secretWord = "queso";
         final String intentWord = "aboca";
 
-        List<PositionAtIntentWord> hitList = Utils.checkHits(secretWord, intentWord);
+        List<PositionOfIntent> hitList = Utils.checkHits(secretWord, intentWord);
         long partialHits = hitList.stream().filter(position ->
-                        position.getHitStatus().equals(PositionAtIntentWord.PARTIAL_HIT)).count();
+                        position.getHitStatus().equals(PositionOfIntent.PARTIAL_HIT)).count();
         long partialHitsExpected = 1L;
 
         assertEquals(partialHitsExpected, partialHits);
@@ -52,9 +52,9 @@ public class CheckHitsTest {
         final String secretWord = "queso";
         final String intentWord = "aboco";
 
-        List<PositionAtIntentWord> hitList = Utils.checkHits(secretWord, intentWord);
+        List<PositionOfIntent> hitList = Utils.checkHits(secretWord, intentWord);
         long partialHits = hitList.stream().filter(position ->
-                        position.getHitStatus().equals(PositionAtIntentWord.PARTIAL_HIT)).count();
+                        position.getHitStatus().equals(PositionOfIntent.PARTIAL_HIT)).count();
         long partialHitsExpected = 0L;
 
         assertEquals(partialHitsExpected, partialHits);
@@ -65,11 +65,11 @@ public class CheckHitsTest {
         final String secretWord = "aloar";
         final String intentWord = "abaca";
 
-        List<PositionAtIntentWord> hitList = Utils.checkHits(secretWord, intentWord);
-        long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionAtIntentWord.HIT))
+        List<PositionOfIntent> hitList = Utils.checkHits(secretWord, intentWord);
+        long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionOfIntent.HIT))
                 .count();
         long partialHits = hitList.stream().filter(position ->
-                        position.getHitStatus().equals(PositionAtIntentWord.PARTIAL_HIT)).count();
+                        position.getHitStatus().equals(PositionOfIntent.PARTIAL_HIT)).count();
         long partialHitsExpected = 1L;
         long hitsExpected = 1L;
 

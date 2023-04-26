@@ -3,7 +3,7 @@ package com.soprasteria.adivinaLaPalabra.utils;
 import lombok.Data;
 
 @Data
-public class PositionAtIntentWord {
+public class PositionOfIntent {
     public static final String HIT = "hit";
     public static final String PARTIAL_HIT = "partialHit";
     public static final String FAIL = "fail";
@@ -11,7 +11,8 @@ public class PositionAtIntentWord {
     private char charAtPosition;
     private String hitStatus;
 
-    public PositionAtIntentWord(char charAtPosition) {
+    public PositionOfIntent(char charAtPosition) {
         this.charAtPosition = charAtPosition;
+        this.hitStatus = FAIL;
     }
 }
