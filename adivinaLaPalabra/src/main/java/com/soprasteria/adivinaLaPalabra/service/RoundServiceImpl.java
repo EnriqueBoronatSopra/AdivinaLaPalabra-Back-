@@ -1,6 +1,6 @@
 package com.soprasteria.adivinaLaPalabra.service;
 
-import com.soprasteria.adivinaLaPalabra.config.WordsReader;
+import com.soprasteria.adivinaLaPalabra.repository.AllowWords;
 import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
 import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
 import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
@@ -16,14 +16,14 @@ public class RoundServiceImpl implements RoundService {
     private static final Logger logger = LoggerFactory.getLogger(RoundService.class);
 
     @Autowired
-    WordsReader wordsReader;
+    AllowWords allowWords;
 
     @Autowired
     RoundRepository roundRepository;
 
     @Override
     public RoundResponse newRound() {
-        String wordToGuess = wordsReader.getRandomWord();
+        String wordToGuess = allowWords.getRandomWord();
 
         RoundEntity roundEntity = new RoundEntity();
         roundEntity.setWord(wordToGuess);

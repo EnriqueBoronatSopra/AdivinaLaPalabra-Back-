@@ -1,4 +1,4 @@
-package com.soprasteria.adivinaLaPalabra.config;
+package com.soprasteria.adivinaLaPalabra.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class WordsReader {
+public class AllowWords {
 
     private List<String> dictionary;
 
-    public WordsReader() {
+    public AllowWords() {
         convertJsonToList();
     }
 

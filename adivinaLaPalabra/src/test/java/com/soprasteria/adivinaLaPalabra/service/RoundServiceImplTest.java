@@ -1,6 +1,6 @@
 package com.soprasteria.adivinaLaPalabra.service;
 
-import com.soprasteria.adivinaLaPalabra.config.WordsReader;
+import com.soprasteria.adivinaLaPalabra.repository.AllowWords;
 import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
 import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
 import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
@@ -19,7 +19,7 @@ class RoundServiceImplTest {
     private RoundRepository roundRepository;
 
     @Mock
-    private WordsReader wordsReader;
+    private AllowWords allowWords;
 
     @InjectMocks
     private RoundServiceImpl newRoundService;
@@ -34,7 +34,7 @@ class RoundServiceImplTest {
         RoundEntity roundEntitySaved = new RoundEntity();
         roundEntitySaved.setId(ID);
         when(roundRepository.save(any())).thenReturn(roundEntitySaved);
-        when(wordsReader.getRandomWord()).thenReturn(WORD_TO_GUESS);
+        when(allowWords.getRandomWord()).thenReturn(WORD_TO_GUESS);
     }
 
     @Test

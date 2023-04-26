@@ -38,8 +38,9 @@ class ApiRestControllerTest {
     @Test
     void getExistWordTest() throws Exception {
         final String word = "abaca";
+        final long id = 3L;
         when(wordExistService.checkWord(word)).thenReturn(new WordResponse(true));
-        this.mockMvc.perform(get("/rounds/check-word").param("word", word))
+        this.mockMvc.perform(get("/rounds/" + id + "/check-word").param("word", word))
                 .andExpect(status().isOk());
     }
 

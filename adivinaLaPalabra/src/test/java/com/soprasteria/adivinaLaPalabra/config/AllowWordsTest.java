@@ -1,5 +1,6 @@
 package com.soprasteria.adivinaLaPalabra.config;
 
+import com.soprasteria.adivinaLaPalabra.repository.AllowWords;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,19 +8,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WordsReaderTest {
+class AllowWordsTest {
 
-    private WordsReader wordsReader;
+    private AllowWords allowWords;
 
     @BeforeEach
     void setup() {
-        wordsReader = new WordsReader();
+        allowWords = new AllowWords();
     }
 
     @Test
     void testReturnTrueIfWordExist() {
         final String firstWord = "zuzon";
-        boolean result = wordsReader.checkWord(firstWord);
+        boolean result = allowWords.checkWord(firstWord);
 
         assertTrue(result);
     }
@@ -27,20 +28,20 @@ class WordsReaderTest {
     @Test
     void testReturnFalseIfWordNotExist() {
         final String firstWord = "aeiou";
-        boolean result = wordsReader.checkWord(firstWord);
+        boolean result = allowWords.checkWord(firstWord);
 
         assertFalse(result);
     }
 
     @Test
     void testConvertJsonToList() {
-        List<String> words = wordsReader.getDictionary();
+        List<String> words = allowWords.getDictionary();
         assertNotNull(words);
     }
 
     @Test
     void testRandomWordReturnNotNull() {
-        String randomWord = wordsReader.getRandomWord();
+        String randomWord = allowWords.getRandomWord();
 
         assertNotNull(randomWord);
     }
