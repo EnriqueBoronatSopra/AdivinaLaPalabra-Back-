@@ -16,10 +16,10 @@ public class CheckHitsOfWord {
         this.secretWord = secretWord;
 
         this.positionsSecretWord = secretWord.chars()
-                                            .mapToObj(e -> new PositionOfSecret((char) e))
+                                            .mapToObj(character -> new PositionOfSecret((char) character))
                                             .toList();
         this.positionsIntentWord = intentWord.chars()
-                                            .mapToObj(e -> new PositionOfIntent((char) e))
+                                            .mapToObj(character -> new PositionOfIntent((char) character))
                                             .toList();
     }
 
