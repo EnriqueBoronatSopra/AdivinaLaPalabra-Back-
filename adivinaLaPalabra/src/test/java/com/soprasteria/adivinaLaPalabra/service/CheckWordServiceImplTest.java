@@ -135,6 +135,8 @@ class CheckWordServiceImplTest {
         long partialHitsExpected = 1L;
         long hitsExpected = 1L;
 
+        hitList.stream().forEach(e -> System.out.println(e.getHitStatus()));
+
         assertEquals(partialHitsExpected, partialHits);
         assertEquals(hitsExpected, hits);
     }

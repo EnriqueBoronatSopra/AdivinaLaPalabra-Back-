@@ -76,13 +76,13 @@ public class CheckWordServiceImpl implements CheckWordService {
     private void isPartialHit() {
         positionsIntentWord.stream()
                 .filter(position -> !position.isPositionRevised())
-                .filter(position -> secretWord.indexOf(position.getLetter()) != 1)
                 .forEach(positionOfIntent -> {
                     Optional<PositionOfWord> positionOfSecret =
                             positionsSecretWord.stream()
                                     .filter(positionSecretWord ->
                                             positionSecretWord.getLetter() == positionOfIntent.getLetter())
-                                    .filter(positionSecretWord -> !positionSecretWord.isPositionRevised()).findFirst();
+                                    .filter(positionSecretWord -> !positionSecretWord.isPositionRevised())
+                                    .findFirst();
                     if (positionOfSecret.isPresent()) {
                         positionOfIntent.positionRevised();
                         positionOfIntent.setHitStatus(PositionOfWord.PARTIAL_HIT);
