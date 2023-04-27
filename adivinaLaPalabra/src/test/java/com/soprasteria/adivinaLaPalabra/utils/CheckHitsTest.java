@@ -1,5 +1,6 @@
 package com.soprasteria.adivinaLaPalabra.utils;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 
@@ -9,11 +10,16 @@ public class CheckHitsTest {
 
     private CheckHitsOfWord checkHitsOfWord;
 
+    @BeforeEach
+    void setup() {
+        checkHitsOfWord = new CheckHitsOfWord();
+    }
+
     @Test
     void returnFiveHitsIfWordsEqualsTest() {
         final String secretWord = "queso";
         final String intentWord = "queso";
-        checkHitsOfWord = new CheckHitsOfWord(secretWord, intentWord);
+        checkHitsOfWord.setWords(secretWord, intentWord);
 
         List<PositionOfIntent> hitList = checkHitsOfWord.checkHits();
         long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionOfIntent.HIT))
@@ -27,7 +33,7 @@ public class CheckHitsTest {
     void returnZeroHitsIfWordsNotEqualsTest() {
         final String secretWord = "queso";
         final String intentWord = "abaca";
-        checkHitsOfWord = new CheckHitsOfWord(secretWord, intentWord);
+        checkHitsOfWord.setWords(secretWord, intentWord);
 
         List<PositionOfIntent> hitList = checkHitsOfWord.checkHits();
         long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionOfIntent.HIT))
@@ -41,7 +47,7 @@ public class CheckHitsTest {
     void returnOnePartialHitTest() {
         final String secretWord = "queso";
         final String intentWord = "aboca";
-        checkHitsOfWord = new CheckHitsOfWord(secretWord, intentWord);
+        checkHitsOfWord.setWords(secretWord, intentWord);
 
         List<PositionOfIntent> hitList = checkHitsOfWord.checkHits();
         long partialHits = hitList.stream().filter(position ->
@@ -55,7 +61,7 @@ public class CheckHitsTest {
     void returnZeroPartialHitTest() {
         final String secretWord = "queso";
         final String intentWord = "aboco";
-        checkHitsOfWord = new CheckHitsOfWord(secretWord, intentWord);
+        checkHitsOfWord.setWords(secretWord, intentWord);
 
         List<PositionOfIntent> hitList = checkHitsOfWord.checkHits();
         long partialHits = hitList.stream().filter(position ->
@@ -69,7 +75,7 @@ public class CheckHitsTest {
     void returnOnePartialHitAndOneHitTest() {
         final String secretWord = "aloar";
         final String intentWord = "abaca";
-        checkHitsOfWord = new CheckHitsOfWord(secretWord, intentWord);
+        checkHitsOfWord.setWords(secretWord, intentWord);
 
         List<PositionOfIntent> hitList = checkHitsOfWord.checkHits();
         long hits = hitList.stream().filter(position -> position.getHitStatus().equals(PositionOfIntent.HIT))

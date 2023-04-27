@@ -1,15 +1,18 @@
 package com.soprasteria.adivinaLaPalabra.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.stream.IntStream;
 
+@Component
 public class CheckHitsOfWord {
 
-    private final String secretWord;
-    private final List<PositionOfSecret> positionsSecretWord;
-    private final List<PositionOfIntent> positionsIntentWord;
+    private String secretWord;
+    private List<PositionOfSecret> positionsSecretWord;
+    private List<PositionOfIntent> positionsIntentWord;
 
-    public CheckHitsOfWord(String secretWord, String intentWord) {
+    public void setWords(String secretWord, String intentWord) {
         this.secretWord = secretWord;
 
         this.positionsSecretWord = secretWord.chars()
