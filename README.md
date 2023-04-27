@@ -1,4 +1,4 @@
-##Adivina la palabra
+# Adivina la palabra
 
 Guess the Word is a game similar to Wordle, in which the player has to guess a secret five-letter word in five attempts. The game gives the player clues about whether the letters they have entered are correct, incorrect, or in the wrong position.
 
