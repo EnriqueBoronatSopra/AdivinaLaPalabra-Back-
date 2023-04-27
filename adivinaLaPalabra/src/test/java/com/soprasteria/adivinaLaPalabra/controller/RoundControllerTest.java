@@ -1,10 +1,12 @@
 package com.soprasteria.adivinaLaPalabra.controller;
 
+import com.soprasteria.adivinaLaPalabra.dto.PositionOfWordResponse;
 import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
 import com.soprasteria.adivinaLaPalabra.dto.WordResponse;
-import com.soprasteria.adivinaLaPalabra.service.RoundService;
+import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
+import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
 import com.soprasteria.adivinaLaPalabra.service.RoundServiceImpl;
-import com.soprasteria.adivinaLaPalabra.service.WordExistServiceImpl;
+import com.soprasteria.adivinaLaPalabra.service.CheckWordServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,8 +15,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 
@@ -25,7 +31,10 @@ class RoundControllerTest {
     private RoundServiceImpl roundService;
 
     @Mock
-    private WordExistServiceImpl wordExistService;
+    private CheckWordServiceImpl wordExistService;
+
+    @Mock
+    private RoundRepository roundRepository;
 
     @InjectMocks
     private RoundController roundController;
@@ -55,23 +64,33 @@ class RoundControllerTest {
     @Test
     void returnFalseIsNotWord() {
         final String word = "word";
-        WordResponse wordResponse = new WordResponse(false);
-        when(wordExistService.checkWord(any())).thenReturn(wordResponse);
+        final long id = 3L;
+        final RoundEntity roundEntity = new RoundEntity();
+        final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
+        WordResponse wordResponse = new WordResponse(false, positionOfWordResponseList);
+        when(roundRepository.getReferenceById(id)).thenReturn(roundEntity);
+        when(roundRepository.getReferenceById(id).getWord()).thenReturn("word");
+        when(wordExistService.checkWord(any(), eq(3L))).thenReturn(wordResponse);
 
         ResponseEntity<WordResponse> responseEntityExpected = new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
 
-        assertEquals(responseEntityExpected, roundController.wordExist(word, any()));
+        assertEquals(responseEntityExpected, roundController.wordExist(word, id));
     }
 
     @Test
     void returnTrueIsWord() {
         final String word = "word";
-        WordResponse wordResponse = new WordResponse(true);
-        when(wordExistService.checkWord(any())).thenReturn(wordResponse);
+        final long id = 3L;
+        final RoundEntity roundEntity = new RoundEntity();
+        final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
+        WordResponse wordResponse = new WordResponse(true, positionOfWordResponseList);
+        when(roundRepository.getReferenceById(id)).thenReturn(roundEntity);
+        when(roundRepository.getReferenceById(id).getWord()).thenReturn("word");
+        when(wordExistService.checkWord(any(), eq(3L))).thenReturn(wordResponse);
 
         ResponseEntity<WordResponse> responseEntityExpected = ResponseEntity.ok(wordResponse);
 
-        assertEquals(responseEntityExpected, roundController.wordExist(word, any()));
+        assertEquals(responseEntityExpected, roundController.wordExist(word, id));
     }
 
 }
