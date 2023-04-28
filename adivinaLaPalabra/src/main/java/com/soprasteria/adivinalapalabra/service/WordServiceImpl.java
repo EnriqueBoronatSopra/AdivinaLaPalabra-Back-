@@ -4,7 +4,6 @@ import com.soprasteria.adivinalapalabra.dto.PositionOfWordResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
 import com.soprasteria.adivinalapalabra.model.enums.HitsStatus;
 import com.soprasteria.adivinalapalabra.repository.WordsRepository;
-import com.soprasteria.adivinalapalabra.repository.RoundRepository;
 import com.soprasteria.adivinalapalabra.dto.PositionOfWord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
