@@ -86,6 +86,9 @@ public class WordServiceImpl implements WordService {
     }
 
     private PositionOfWordResponse parsePositionsResponse(PositionOfWord positionOfWord) {
-        return new PositionOfWordResponse(positionOfWord.getLetter(), positionOfWord.getHitStatus());
+        return new PositionOfWordResponse(
+                Character.toUpperCase(positionOfWord.getLetter()),
+                positionOfWord.getHitStatus()
+        );
     }
 }
