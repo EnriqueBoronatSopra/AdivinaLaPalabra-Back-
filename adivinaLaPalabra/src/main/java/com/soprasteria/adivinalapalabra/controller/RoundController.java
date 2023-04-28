@@ -4,6 +4,7 @@ import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
 import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
 import com.soprasteria.adivinalapalabra.service.WordServiceImpl;
+import com.soprasteria.adivinalapalabra.utils.ErrorMsgs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +34,14 @@ public class RoundController {
     public ResponseEntity<WordResponse> wordExist(@RequestParam String word, @PathVariable Long idRound) {
         Optional<RoundResponse> roundResponse = roundService.getRound(idRound);
 
-        if (roundResponse.isPresent()) {
-            WordResponse wordResponse = wordService.checkWord(word, roundResponse.get().getWord());
-            return wordResponse.isWordExists()?
-                    ResponseEntity.ok(wordResponse): new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+        if (roundResponse.isEmpty()) {
+            WordResponse wordResponse = new WordResponse(false, null);
+            wordResponse.setErrorMsg(ErrorMsgs.ROUND_NOT_FOUND);
+            return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
         }
 
-        WordResponse wordResponse = new WordResponse(false, null);
-        return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+        WordResponse wordResponse = wordService.checkWord(word, roundResponse.get().getWord());
+        return wordResponse.isWordExists()?
+                ResponseEntity.ok(wordResponse): new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
     }
 }
