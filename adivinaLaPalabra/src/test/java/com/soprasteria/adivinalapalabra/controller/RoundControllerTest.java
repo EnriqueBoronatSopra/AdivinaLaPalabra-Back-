@@ -70,7 +70,7 @@ class RoundControllerTest {
         final RoundResponse roundResponse = new RoundResponse();
         final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
         final Optional<RoundResponse> optionalRoundResponse = Optional.of(roundResponse);
-        final WordResponse wordResponse = new WordResponse(false, positionOfWordResponseList);
+        final WordResponse wordResponse = new WordResponse(false, positionOfWordResponseList, false);
 
         when(roundService.getRound(id)).thenReturn(optionalRoundResponse);
         when(roundRepository.getReferenceById(id)).thenReturn(roundEntity);
@@ -90,7 +90,7 @@ class RoundControllerTest {
         final RoundResponse roundResponse = new RoundResponse();
         final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
         final Optional<RoundResponse> optionalRoundResponse = Optional.of(roundResponse);
-        final WordResponse wordResponse = new WordResponse(true, positionOfWordResponseList);
+        final WordResponse wordResponse = new WordResponse(true, positionOfWordResponseList, false);
 
         when(roundService.getRound(id)).thenReturn(optionalRoundResponse);
         when(roundRepository.getReferenceById(id)).thenReturn(roundEntity);

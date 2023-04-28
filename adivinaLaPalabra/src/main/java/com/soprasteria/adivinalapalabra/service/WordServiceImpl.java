@@ -24,10 +24,13 @@ public class WordServiceImpl implements WordService {
 
         if (wordExist) {
             List<PositionOfWordResponse> positionOfWordResponseList = checkHits(secretWord, intentWord);
-            return new WordResponse(wordExist, positionOfWordResponseList);
+            if (positionOfWordResponseList.stream().allMatch(position -> position.getHitStatus().equals(HitsStatus.HIT))) {
+                return new WordResponse(wordExist, positionOfWordResponseList, true);
+            }
+            return new WordResponse(wordExist, positionOfWordResponseList, false);
         }
 
-        return new WordResponse(wordExist, null);
+        return new WordResponse(wordExist, null, false);
     }
 
     private List<PositionOfWord> parseWord(String word) {

@@ -16,8 +16,11 @@ public class WordResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String errorMsg;
 
-    public WordResponse(boolean wordExists, List<PositionOfWordResponse> positionOfWordResponseList) {
+    private boolean roundWord;
+
+    public WordResponse(boolean wordExists, List<PositionOfWordResponse> positionOfWordResponseList, boolean roundWord) {
         this.wordExists = wordExists;
         this.positionOfWordResponseList = positionOfWordResponseList;
+        this.roundWord = roundWord;
     }
 }
