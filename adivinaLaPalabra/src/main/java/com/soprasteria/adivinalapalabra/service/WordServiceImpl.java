@@ -18,13 +18,9 @@ public class WordServiceImpl implements WordService {
     @Autowired
     private WordsRepository wordsRepository;
 
-    @Autowired
-    private RoundRepository roundRepository;
-
     @Override
-    public WordResponse checkWord(String word, long id) {
+    public WordResponse checkWord(String word, String secretWord) {
         String intentWord = word.toLowerCase();
-        String secretWord = roundRepository.getReferenceById(id).getWord();
         boolean wordExist = wordsRepository.checkWord(intentWord);
 
         if (wordExist) {

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/rounds")
@@ -29,9 +31,15 @@ public class RoundController {
 
     @GetMapping("/{idRound}/check-word")
     public ResponseEntity<WordResponse> wordExist(@RequestParam String word, @PathVariable Long idRound) {
-        WordResponse wordResponse = wordService.checkWord(word, idRound);
+        Optional<RoundResponse> roundResponse = roundService.getRound(idRound);
 
-        return wordResponse.isWordExists()?
-                ResponseEntity.ok(wordResponse): new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+        if (roundResponse.isPresent()) {
+            WordResponse wordResponse = wordService.checkWord(word, roundResponse.get().getWord());
+            return wordResponse.isWordExists()?
+                    ResponseEntity.ok(wordResponse): new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+        }
+
+        WordResponse wordResponse = new WordResponse(false, null);
+        return new ResponseEntity<>(wordResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
