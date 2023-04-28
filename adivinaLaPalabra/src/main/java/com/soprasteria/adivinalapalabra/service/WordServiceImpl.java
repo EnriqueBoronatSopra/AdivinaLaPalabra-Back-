@@ -26,7 +26,6 @@ public class WordServiceImpl implements WordService {
             List<PositionOfWordResponse> positionOfWordResponseList = checkHits(secretWord, intentWord);
             return new WordResponse(wordExist, positionOfWordResponseList);
         }
-
         return new WordResponse(wordExist, null);
     }
 
