@@ -1,9 +1,9 @@
-package com.soprasteria.adivinaLaPalabra.service;
+package com.soprasteria.adivinalapalabra.service;
 
-import com.soprasteria.adivinaLaPalabra.config.WordsReader;
-import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
-import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
-import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
+import com.soprasteria.adivinalapalabra.repository.WordsRepository;
+import com.soprasteria.adivinalapalabra.dto.RoundResponse;
+import com.soprasteria.adivinalapalabra.model.RoundEntity;
+import com.soprasteria.adivinalapalabra.repository.RoundRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,14 @@ public class RoundServiceImpl implements RoundService {
     private static final Logger logger = LoggerFactory.getLogger(RoundService.class);
 
     @Autowired
-    WordsReader wordsReader;
+    private WordsRepository wordsRepository;
 
     @Autowired
-    RoundRepository roundRepository;
+    private RoundRepository roundRepository;
 
     @Override
     public RoundResponse newRound() {
-        String wordToGuess = wordsReader.getRandomWord();
+        String wordToGuess = wordsRepository.getRandomWord();
 
         RoundEntity roundEntity = new RoundEntity();
         roundEntity.setWord(wordToGuess);

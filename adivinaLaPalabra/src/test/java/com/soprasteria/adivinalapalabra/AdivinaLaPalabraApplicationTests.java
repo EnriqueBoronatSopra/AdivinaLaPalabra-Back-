@@ -1,4 +1,4 @@
-package com.soprasteria.adivinaLaPalabra;
+package com.soprasteria.adivinalapalabra;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

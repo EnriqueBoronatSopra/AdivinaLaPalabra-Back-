@@ -1,10 +1,9 @@
-package com.soprasteria.adivinaLaPalabra.controller;
+package com.soprasteria.adivinalapalabra.controller;
 
-import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
-import com.soprasteria.adivinaLaPalabra.dto.WordResponse;
-import com.soprasteria.adivinaLaPalabra.service.RoundService;
-import com.soprasteria.adivinaLaPalabra.service.RoundServiceImpl;
-import com.soprasteria.adivinaLaPalabra.service.WordExistServiceImpl;
+import com.soprasteria.adivinalapalabra.dto.RoundResponse;
+import com.soprasteria.adivinalapalabra.dto.WordResponse;
+import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
+import com.soprasteria.adivinalapalabra.service.WordServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ public class RoundController {
     private RoundServiceImpl roundService;
 
     @Autowired
-    private WordExistServiceImpl wordService;
+    private WordServiceImpl wordService;
 
     @PostMapping
     public ResponseEntity<RoundResponse> newRound() {
@@ -30,7 +29,7 @@ public class RoundController {
 
     @GetMapping("/{idRound}/check-word")
     public ResponseEntity<WordResponse> wordExist(@RequestParam String word, @PathVariable Long idRound) {
-        WordResponse wordResponse = wordService.checkWord(word);
+        WordResponse wordResponse = wordService.checkWord(word, idRound);
 
         return wordResponse.isWordExists()?
                 ResponseEntity.ok(wordResponse): new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);

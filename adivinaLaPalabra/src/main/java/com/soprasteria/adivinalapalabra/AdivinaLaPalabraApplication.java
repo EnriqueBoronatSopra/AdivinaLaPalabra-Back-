@@ -1,4 +1,4 @@
-package com.soprasteria.adivinaLaPalabra;
+package com.soprasteria.adivinalapalabra;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

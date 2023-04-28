@@ -1,8 +1,6 @@
-package com.soprasteria.adivinaLaPalabra.dto;
+package com.soprasteria.adivinalapalabra.dto;
 
 import lombok.Data;
-
-import java.util.UUID;
 
 @Data
 public class RoundResponse {

@@ -1,4 +1,4 @@
-package com.soprasteria.adivinaLaPalabra.model;
+package com.soprasteria.adivinalapalabra.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

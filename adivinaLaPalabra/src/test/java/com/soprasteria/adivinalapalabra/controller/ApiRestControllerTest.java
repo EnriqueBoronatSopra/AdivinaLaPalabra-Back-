@@ -1,9 +1,10 @@
-package com.soprasteria.adivinaLaPalabra.controller;
+package com.soprasteria.adivinalapalabra.controller;
 
-import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
-import com.soprasteria.adivinaLaPalabra.dto.WordResponse;
-import com.soprasteria.adivinaLaPalabra.service.RoundServiceImpl;
-import com.soprasteria.adivinaLaPalabra.service.WordExistServiceImpl;
+import com.soprasteria.adivinalapalabra.dto.PositionOfWordResponse;
+import com.soprasteria.adivinalapalabra.dto.RoundResponse;
+import com.soprasteria.adivinalapalabra.dto.WordResponse;
+import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
+import com.soprasteria.adivinalapalabra.service.WordServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +14,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,7 +31,7 @@ class ApiRestControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private WordExistServiceImpl wordExistService;
+    private WordServiceImpl checkWordService;
 
     @MockBean
     private RoundServiceImpl roundService;
@@ -38,16 +42,24 @@ class ApiRestControllerTest {
     @Test
     void getExistWordTest() throws Exception {
         final String word = "abaca";
-        when(wordExistService.checkWord(word)).thenReturn(new WordResponse(true));
-        this.mockMvc.perform(get("/rounds/check-word").param("word", word))
+        final long id = 3L;
+        final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
+
+        when(checkWordService.checkWord(word, id))
+                .thenReturn(new WordResponse(true, positionOfWordResponseList));
+        this.mockMvc.perform(get("/rounds/" + id + "/check-word").param("word", word))
                 .andExpect(status().isOk());
     }
 
     @Test
     void getNotExistWordTest() throws Exception {
         final String word = "abaca";
-        when(wordExistService.checkWord(word)).thenReturn(new WordResponse(false));
-        this.mockMvc.perform(get("/rounds/check-word").param("word", word))
+        final long id = 3L;
+        final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
+
+        when(checkWordService.checkWord(word, id))
+                .thenReturn(new WordResponse(false, positionOfWordResponseList));
+        this.mockMvc.perform(get("/rounds/" + id + "/check-word").param("word", word))
                 .andExpect(status().isNotFound());
     }
 

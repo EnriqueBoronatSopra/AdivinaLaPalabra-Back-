@@ -1,13 +1,13 @@
-package com.soprasteria.adivinaLaPalabra.model;
+package com.soprasteria.adivinalapalabra.model;
 
-import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
+import com.soprasteria.adivinalapalabra.repository.RoundRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.openMocks;
 
 class RoundEntityTest {
 
@@ -18,7 +18,7 @@ class RoundEntityTest {
 
     @BeforeEach
     void setup() {
-        MockitoAnnotations.openMocks(this);
+        openMocks(this);
         RoundEntity roundEntitySaved = new RoundEntity();
         roundEntitySaved.setId(3L);
         when(roundRepository.save(roundEntity)).thenReturn(roundEntitySaved);

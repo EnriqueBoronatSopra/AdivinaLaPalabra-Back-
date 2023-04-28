@@ -1,6 +1,6 @@
-package com.soprasteria.adivinaLaPalabra.repository;
+package com.soprasteria.adivinalapalabra.repository;
 
-import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
+import com.soprasteria.adivinalapalabra.model.RoundEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

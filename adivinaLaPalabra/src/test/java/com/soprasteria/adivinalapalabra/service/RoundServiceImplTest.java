@@ -1,32 +1,32 @@
-package com.soprasteria.adivinaLaPalabra.service;
+package com.soprasteria.adivinalapalabra.service;
 
-import com.soprasteria.adivinaLaPalabra.config.WordsReader;
-import com.soprasteria.adivinaLaPalabra.dto.RoundResponse;
-import com.soprasteria.adivinaLaPalabra.model.RoundEntity;
-import com.soprasteria.adivinaLaPalabra.repository.RoundRepository;
+import com.soprasteria.adivinalapalabra.repository.WordsRepository;
+import com.soprasteria.adivinalapalabra.dto.RoundResponse;
+import com.soprasteria.adivinalapalabra.model.RoundEntity;
+import com.soprasteria.adivinalapalabra.repository.RoundRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.openMocks;
 
 class RoundServiceImplTest {
     @Mock
     private RoundRepository roundRepository;
 
     @Mock
-    private WordsReader wordsReader;
+    private WordsRepository wordsRepository;
 
     @InjectMocks
     private RoundServiceImpl newRoundService;
 
     @BeforeEach
     void setup() {
-        MockitoAnnotations.openMocks(this);
+        openMocks(this);
 
         final Long ID = 3L;
         final String WORD_TO_GUESS = "abaca";
@@ -34,7 +34,7 @@ class RoundServiceImplTest {
         RoundEntity roundEntitySaved = new RoundEntity();
         roundEntitySaved.setId(ID);
         when(roundRepository.save(any())).thenReturn(roundEntitySaved);
-        when(wordsReader.getRandomWord()).thenReturn(WORD_TO_GUESS);
+        when(wordsRepository.getRandomWord()).thenReturn(WORD_TO_GUESS);
     }
 
     @Test
