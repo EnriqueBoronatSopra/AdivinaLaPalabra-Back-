@@ -35,7 +35,7 @@ public class RoundController {
         Optional<RoundResponse> roundResponse = roundService.getRound(idRound);
 
         if (roundResponse.isEmpty()) {
-            WordResponse wordResponse = new WordResponse(false, null, false);
+            WordResponse wordResponse = new WordResponse(false, null);
             wordResponse.setErrorMsg(ErrorMsgs.ROUND_NOT_FOUND);
             return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
         }

@@ -1,6 +1,7 @@
 package com.soprasteria.adivinalapalabra.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.soprasteria.adivinalapalabra.model.enums.HitsStatus;
 import lombok.Data;
 
 import java.util.List;
@@ -16,11 +17,19 @@ public class WordResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String errorMsg;
 
-    private boolean roundWord;
+    private boolean roundWind;
 
-    public WordResponse(boolean wordExists, List<PositionOfWordResponse> positionOfWordResponseList, boolean roundWord) {
+    public WordResponse(boolean wordExists, List<PositionOfWordResponse> positionOfWordResponseList) {
         this.wordExists = wordExists;
         this.positionOfWordResponseList = positionOfWordResponseList;
-        this.roundWord = roundWord;
+        if (positionOfWordResponseList != null) {
+            roundWind = endOfGame(positionOfWordResponseList);
+        }
+
     }
+    private boolean endOfGame(List<PositionOfWordResponse> listPositionWordResponse) {
+        return listPositionWordResponse.stream().allMatch(position -> position.getHitStatus().equals(HitsStatus.HIT));
+    }
+
+
 }

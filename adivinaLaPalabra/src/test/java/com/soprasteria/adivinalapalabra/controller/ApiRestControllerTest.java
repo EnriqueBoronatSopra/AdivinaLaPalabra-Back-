@@ -48,7 +48,7 @@ class ApiRestControllerTest {
         final Optional<RoundResponse> optionalRoundResponse = Optional.of(roundResponse);
 
         when(wordService.checkWord(eq(word), any()))
-                .thenReturn(new WordResponse(true, positionOfWordResponseList, false));
+                .thenReturn(new WordResponse(true, positionOfWordResponseList));
         when(roundService.getRound(id)).thenReturn(optionalRoundResponse);
 
         this.mockMvc.perform(get("/rounds/" + id + "/check-word").param("word", word))
@@ -64,7 +64,7 @@ class ApiRestControllerTest {
         final Optional<RoundResponse> optionalRoundResponse = Optional.of(roundResponse);
 
         when(wordService.checkWord(eq(word), any()))
-                .thenReturn(new WordResponse(false, positionOfWordResponseList, false));
+                .thenReturn(new WordResponse(false, positionOfWordResponseList));
         when(roundService.getRound(id)).thenReturn(optionalRoundResponse);
 
         this.mockMvc.perform(get("/rounds/" + id + "/check-word").param("word", word))
