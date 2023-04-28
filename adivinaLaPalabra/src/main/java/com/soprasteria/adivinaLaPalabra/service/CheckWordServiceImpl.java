@@ -16,7 +16,6 @@ import java.util.stream.IntStream;
 public class CheckWordServiceImpl implements CheckWordService {
 
     private String secretWord;
-    private String intentWord;
     private List<PositionOfWord> positionsSecretWord;
     private List<PositionOfWord> positionsIntentWord;
 
@@ -28,7 +27,7 @@ public class CheckWordServiceImpl implements CheckWordService {
 
     @Override
     public WordResponse checkWord(String word, long id) {
-        intentWord = word.toLowerCase();
+        String intentWord = word.toLowerCase();
         secretWord = roundRepository.getReferenceById(id).getWord();
         boolean wordExist = allowWords.checkWord(intentWord);
         List<PositionOfWordResponse> positionOfWordResponseList = null;
