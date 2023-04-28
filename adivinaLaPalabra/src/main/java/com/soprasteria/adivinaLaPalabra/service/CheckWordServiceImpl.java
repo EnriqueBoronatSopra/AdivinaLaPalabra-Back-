@@ -30,15 +30,16 @@ public class CheckWordServiceImpl implements CheckWordService {
         String intentWord = word.toLowerCase();
         secretWord = roundRepository.getReferenceById(id).getWord();
         boolean wordExist = allowWords.checkWord(intentWord);
-        List<PositionOfWordResponse> positionOfWordResponseList = null;
 
         if (wordExist) {
             setWords(secretWord, intentWord);
             checkHits();
-            positionOfWordResponseList = positionsIntentWord.stream().map(this::parsePositionsResponse).toList();
+            List<PositionOfWordResponse> positionOfWordResponseList =
+                    positionsIntentWord.stream().map(this::parsePositionsResponse).toList();
+            return new WordResponse(wordExist, positionOfWordResponseList);
         }
 
-        return new WordResponse(wordExist, positionOfWordResponseList);
+        return new WordResponse(wordExist, null);
     }
 
     public void setWords(String secretWord, String intentWord) {
