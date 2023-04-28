@@ -40,6 +40,6 @@ public class RoundController {
         }
 
         WordResponse wordResponse = new WordResponse(false, null);
-        return new ResponseEntity<>(wordResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
     }
 }
