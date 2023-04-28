@@ -20,9 +20,6 @@ import static org.mockito.MockitoAnnotations.openMocks;
 class WordServiceImplTest {
 
     @Mock
-    private RoundRepository roundRepository;
-
-    @Mock
     private WordsRepository wordsRepositoryMock;
 
     @InjectMocks
@@ -38,13 +35,11 @@ class WordServiceImplTest {
     @Test
     void returnTrueIfWordExist() {
         final String WORD1 = "abaca";
+        final String WORD2 = "fsofb";
         final RoundEntity roundEntity = new RoundEntity();
-        roundEntity.setId(ID);
-        roundEntity.setWord(WORD1);
         when(wordsRepositoryMock.checkWord(WORD1)).thenReturn(true);
-        when(roundRepository.getReferenceById(ID)).thenReturn(roundEntity);
 
-        WordResponse wordResponse = wordService.checkWord(WORD1, ID);
+        WordResponse wordResponse = wordService.checkWord(WORD1, WORD2);
         boolean expectedResult = wordResponse.isWordExists();
 
         assertTrue(expectedResult);
@@ -52,14 +47,14 @@ class WordServiceImplTest {
 
     @Test
     void returnFalseIfWordNotExist() {
+        final String WORD1 = "abaca";
         final String WORD2 = "fsofb";
         final RoundEntity roundEntity = new RoundEntity();
         roundEntity.setId(ID);
         roundEntity.setWord(WORD2);
-        when(wordsRepositoryMock.checkWord(WORD2)).thenReturn(false);
-        when(roundRepository.getReferenceById(ID)).thenReturn(roundEntity);
+        when(wordsRepositoryMock.checkWord(WORD1)).thenReturn(false);
 
-        WordResponse wordResponse = wordService.checkWord(WORD2, ID);
+        WordResponse wordResponse = wordService.checkWord(WORD1, WORD2);
         boolean expectedResult = wordResponse.isWordExists();
 
         assertFalse(expectedResult);

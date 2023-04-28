@@ -4,7 +4,6 @@ import com.soprasteria.adivinalapalabra.dto.PositionOfWordResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
 import com.soprasteria.adivinalapalabra.model.enums.HitsStatus;
 import com.soprasteria.adivinalapalabra.repository.WordsRepository;
-import com.soprasteria.adivinalapalabra.repository.RoundRepository;
 import com.soprasteria.adivinalapalabra.dto.PositionOfWord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +17,9 @@ public class WordServiceImpl implements WordService {
     @Autowired
     private WordsRepository wordsRepository;
 
-    @Autowired
-    private RoundRepository roundRepository;
-
     @Override
-    public WordResponse checkWord(String word, long id) {
+    public WordResponse checkWord(String word, String secretWord) {
         String intentWord = word.toLowerCase();
-        String secretWord = roundRepository.getReferenceById(id).getWord();
         boolean wordExist = wordsRepository.checkWord(intentWord);
 
         if (wordExist) {

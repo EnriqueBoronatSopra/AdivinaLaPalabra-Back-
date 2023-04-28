@@ -17,7 +17,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,22 +34,23 @@ class ApiRestControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private WordServiceImpl checkWordService;
+    private WordServiceImpl wordService;
 
     @MockBean
     private RoundServiceImpl roundService;
-
-    @InjectMocks
-    private RoundResponse roundResponse;
 
     @Test
     void getExistWordTest() throws Exception {
         final String word = "abaca";
         final long id = 3L;
         final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
+        final RoundResponse roundResponse = new RoundResponse();
+        final Optional<RoundResponse> optionalRoundResponse = Optional.of(roundResponse);
 
-        when(checkWordService.checkWord(word, id))
+        when(wordService.checkWord(eq(word), any()))
                 .thenReturn(new WordResponse(true, positionOfWordResponseList));
+        when(roundService.getRound(id)).thenReturn(optionalRoundResponse);
+
         this.mockMvc.perform(get("/rounds/" + id + "/check-word").param("word", word))
                 .andExpect(status().isOk());
     }
@@ -56,9 +60,13 @@ class ApiRestControllerTest {
         final String word = "abaca";
         final long id = 3L;
         final List<PositionOfWordResponse> positionOfWordResponseList = new ArrayList<>();
+        final RoundResponse roundResponse = new RoundResponse();
+        final Optional<RoundResponse> optionalRoundResponse = Optional.of(roundResponse);
 
-        when(checkWordService.checkWord(word, id))
+        when(wordService.checkWord(eq(word), any()))
                 .thenReturn(new WordResponse(false, positionOfWordResponseList));
+        when(roundService.getRound(id)).thenReturn(optionalRoundResponse);
+
         this.mockMvc.perform(get("/rounds/" + id + "/check-word").param("word", word))
                 .andExpect(status().isNotFound());
     }
