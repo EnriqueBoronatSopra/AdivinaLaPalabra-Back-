@@ -17,19 +17,16 @@ public class WordResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String errorMsg;
 
-    private boolean roundWind;
+    private boolean roundWin;
 
     public WordResponse(boolean wordExists, List<PositionOfWordResponse> positionOfWordResponseList) {
         this.wordExists = wordExists;
         this.positionOfWordResponseList = positionOfWordResponseList;
         if (positionOfWordResponseList != null) {
-            roundWind = endOfGame(positionOfWordResponseList);
+            roundWin = endOfGame(positionOfWordResponseList);
         }
-
     }
     private boolean endOfGame(List<PositionOfWordResponse> listPositionWordResponse) {
         return listPositionWordResponse.stream().allMatch(position -> position.getHitStatus().equals(HitsStatus.HIT));
     }
-
-
 }
