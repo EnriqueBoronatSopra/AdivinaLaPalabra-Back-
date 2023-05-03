@@ -12,5 +12,10 @@ public class RoundEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String word;
+    private int intentNumber;
+
+    public void incrementIntentInOne() {
+        intentNumber++;
+    }
 
 }

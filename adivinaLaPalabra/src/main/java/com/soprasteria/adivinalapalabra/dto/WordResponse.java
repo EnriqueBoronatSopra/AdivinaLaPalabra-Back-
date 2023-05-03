@@ -17,6 +17,8 @@ public class WordResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String errorMsg;
 
+    private int roundIntentNumber;
+
     private boolean roundWin;
 
     public WordResponse(boolean wordExists, List<PositionOfWordResponse> positionOfWordResponseList) {

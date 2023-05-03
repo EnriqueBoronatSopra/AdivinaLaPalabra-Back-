@@ -30,6 +30,7 @@ public class RoundServiceImpl implements RoundService {
 
         RoundEntity roundEntity = new RoundEntity();
         roundEntity.setWord(wordToGuess);
+        roundEntity.setIntentNumber(0);
 
         try {
             RoundEntity savedRoundEntity = roundRepository.save(roundEntity);
@@ -56,9 +57,19 @@ public class RoundServiceImpl implements RoundService {
     @Override
     public RoundResponse parseRound(RoundEntity roundEntity) {
         RoundResponse roundResponse = new RoundResponse();
+
         roundResponse.setId(roundEntity.getId());
         roundResponse.setWord(roundEntity.getWord());
 
         return roundResponse;
+    }
+
+    @Override
+    public int updateIntentNumber(long id) {
+        RoundEntity roundEntity = roundRepository.getReferenceById(id);
+        roundEntity.incrementIntentInOne();
+        roundRepository.save(roundEntity);
+
+        return roundEntity.getIntentNumber();
     }
 }
