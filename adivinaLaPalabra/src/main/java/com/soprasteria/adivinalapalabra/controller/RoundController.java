@@ -41,7 +41,11 @@ public class RoundController {
         }
 
         WordResponse wordResponse = wordService.checkWord(word, roundResponse.get().getWord());
-        return wordResponse.isWordExists()?
-                ResponseEntity.ok(wordResponse): new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+        if (wordResponse.isWordExists()) {
+            wordResponse.setRoundIntentNumber(roundService.updateIntentNumber(idRound));
+            return ResponseEntity.ok(wordResponse);
+        }
+        
+        return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
     }
 }

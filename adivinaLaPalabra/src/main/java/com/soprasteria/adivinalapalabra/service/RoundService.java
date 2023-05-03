@@ -7,6 +7,10 @@ import java.util.Optional;
 
 public interface RoundService {
     RoundResponse newRound();
+
     Optional<RoundResponse> getRound(long id);
+
     RoundResponse parseRound(RoundEntity roundEntity);
+
+    int updateIntentNumber(long id);
 }
