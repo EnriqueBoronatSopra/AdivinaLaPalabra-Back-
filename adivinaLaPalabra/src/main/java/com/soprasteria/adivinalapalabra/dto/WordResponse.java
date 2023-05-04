@@ -21,6 +21,9 @@ public class WordResponse {
 
     private boolean roundWin;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String secretWord;
+
     public WordResponse(boolean wordExists, List<PositionOfWordResponse> positionOfWordResponseList) {
         this.wordExists = wordExists;
         this.positionOfWordResponseList = positionOfWordResponseList;

@@ -1,5 +1,6 @@
 package com.soprasteria.adivinalapalabra.controller;
 
+import com.soprasteria.adivinalapalabra.configuration.GameConfiguration;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
 import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
@@ -40,9 +41,16 @@ public class RoundController {
             return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
         }
 
-        WordResponse wordResponse = wordService.checkWord(word, roundResponse.get().getWord());
+        String secretWord = roundResponse.get().getWord();
+
+        WordResponse wordResponse = wordService.checkWord(word, secretWord);
         if (wordResponse.isWordExists()) {
-            wordResponse.setRoundIntentNumber(roundService.updateIntentNumber(idRound));
+            int roundIntentNumber = roundService.updateIntentNumber(idRound);
+
+            if (roundIntentNumber >= GameConfiguration.MAX_ATTEMPTS_ALLOWED) {
+                wordResponse.setSecretWord(secretWord);
+            }
+            wordResponse.setRoundIntentNumber(roundIntentNumber);
             return ResponseEntity.ok(wordResponse);
         }
         
