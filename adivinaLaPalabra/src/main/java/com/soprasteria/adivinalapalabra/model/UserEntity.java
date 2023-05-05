@@ -21,16 +21,7 @@ public class UserEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private List<RoundEntity> listRound;
-
-
-    public Boolean userUnique(String name){
-       boolean unique = true;
-       if (name.equals(this.name)) {
-           unique = false;
-       }
-       return unique;
-
-    }
+    
 
 
 
