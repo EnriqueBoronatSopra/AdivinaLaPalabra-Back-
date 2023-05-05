@@ -1,6 +1,6 @@
 package com.soprasteria.adivinalapalabra.controller;
 
-import com.soprasteria.adivinalapalabra.dto.UserDto;
+import com.soprasteria.adivinalapalabra.dto.LoginRequest;
 import com.soprasteria.adivinalapalabra.service.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +16,10 @@ public class LoginController {
     private LoginServiceImpl loginService;
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         final String CORRECT_LOGIN = "Correct login";
         final String INCORRECT_LOGIN = "Incorrect login";
-        return loginService.login(userDto).equals("Correct login")?
+        return loginService.login(loginRequest).equals("Correct login")?
                 ResponseEntity.ok(CORRECT_LOGIN) :
                 new ResponseEntity<>(INCORRECT_LOGIN, HttpStatus.UNAUTHORIZED);
     }

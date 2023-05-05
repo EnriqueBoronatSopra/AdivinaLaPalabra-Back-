@@ -1,6 +1,6 @@
 package com.soprasteria.adivinalapalabra.service;
 
-import com.soprasteria.adivinalapalabra.dto.UserDto;
+import com.soprasteria.adivinalapalabra.dto.LoginRequest;
 import com.soprasteria.adivinalapalabra.model.UserEntity;
 import com.soprasteria.adivinalapalabra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserRepository userRepository;
     @Override
-    public String login(UserDto userDto) {
-        Optional<UserEntity> user = userRepository.findByName(userDto.getName());
+    public String login(LoginRequest loginRequest) {
+        Optional<UserEntity> user = userRepository.findByName(loginRequest.getName());
 
-        return user.isEmpty() || !user.get().getPassword().equals(userDto.getPassword())? INCORRECT_LOGIN : CORRECT_LOGIN;
+        return user.isEmpty() || !user.get().getPassword().equals(loginRequest.getPassword())? INCORRECT_LOGIN : CORRECT_LOGIN;
     }
 }

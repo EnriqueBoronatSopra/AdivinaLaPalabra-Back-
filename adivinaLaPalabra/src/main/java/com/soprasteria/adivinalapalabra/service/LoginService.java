@@ -1,7 +1,7 @@
 package com.soprasteria.adivinalapalabra.service;
 
-import com.soprasteria.adivinalapalabra.dto.UserDto;
+import com.soprasteria.adivinalapalabra.dto.LoginRequest;
 
 public interface LoginService {
-    String login(UserDto userDto);
+    String login(LoginRequest loginRequest);
 }

@@ -1,6 +1,6 @@
 package com.soprasteria.adivinalapalabra.controller;
 
-import com.soprasteria.adivinalapalabra.dto.UserDto;
+import com.soprasteria.adivinalapalabra.dto.LoginRequest;
 import com.soprasteria.adivinalapalabra.service.LoginServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,11 +24,11 @@ public class LoginControllerTest {
         String requestExpected = "Correct login";
         String name = "name";
         String password = "password";
-        UserDto userDto = new UserDto(name, password);
+        LoginRequest loginRequest = new LoginRequest(name, password);
 
-        when(loginService.login(userDto)).thenReturn(LoginServiceImpl.CORRECT_LOGIN);
+        when(loginService.login(loginRequest)).thenReturn(LoginServiceImpl.CORRECT_LOGIN);
 
-        String request = loginService.login(userDto);
+        String request = loginService.login(loginRequest);
 
         assertEquals(requestExpected, request);
     }
@@ -38,11 +38,11 @@ public class LoginControllerTest {
         String requestExpected = "Incorrect login";
         String name = "name";
         String password = "password";
-        UserDto userDto = new UserDto(name, password);
+        LoginRequest loginRequest = new LoginRequest(name, password);
 
-        when(loginService.login(userDto)).thenReturn(LoginServiceImpl.INCORRECT_LOGIN);
+        when(loginService.login(loginRequest)).thenReturn(LoginServiceImpl.INCORRECT_LOGIN);
 
-        String request = loginService.login(userDto);
+        String request = loginService.login(loginRequest);
 
         assertEquals(requestExpected, request);
     }

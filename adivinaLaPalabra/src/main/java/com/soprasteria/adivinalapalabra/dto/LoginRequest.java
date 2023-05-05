@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserDto {
+public class LoginRequest {
 
     @JsonProperty("name")
     private final String name;
