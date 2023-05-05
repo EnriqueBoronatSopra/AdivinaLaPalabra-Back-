@@ -1,7 +1,6 @@
 package com.soprasteria.adivinalapalabra.controller;
 
 import com.soprasteria.adivinalapalabra.dto.UserDto;
-import com.soprasteria.adivinalapalabra.service.LoginService;
 import com.soprasteria.adivinalapalabra.service.LoginServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class UserControllerTest {
+public class LoginControllerTest {
     @Mock
     private LoginServiceImpl loginService;
 
     @InjectMocks
-    private UserController UserController;
+    private LoginController LoginController;
 
     @Test
     void correctLoginTest() {
