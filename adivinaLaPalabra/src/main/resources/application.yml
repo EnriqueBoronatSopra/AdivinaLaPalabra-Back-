@@ -6,5 +6,5 @@ spring:
     password: mysql
   jpa:
     hibernate:
-     ddlAuto: create-drop
+     ddlAuto: update
 

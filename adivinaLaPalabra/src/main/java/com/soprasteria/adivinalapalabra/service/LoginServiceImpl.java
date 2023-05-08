@@ -8,6 +8,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
@@ -16,9 +17,11 @@ import static com.soprasteria.adivinalapalabra.utils.ErrorMsgs.INCORRECT_LOGIN;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    private static final String SECRET_KEY = "T4k3_Up23";
+    private static final String SECRET_WORD = "T4k3_Up23";
+
     @Autowired
     private UserRepository userRepository;
+
     @Override
     public String login(LoginRequest loginRequest) {
         Optional<UserEntity> user = userRepository.findByName(loginRequest.getName());
@@ -27,9 +30,12 @@ public class LoginServiceImpl implements LoginService {
             return INCORRECT_LOGIN;
         }
 
+        final String SECRET_KEY = Base64.getEncoder().encodeToString(SECRET_WORD.getBytes());
+        final int tokenValidity = 900000;
+
         return Jwts.builder()
                 .setSubject(user.get().getName())
-                .setExpiration(new Date(System.currentTimeMillis() + 900000))
+                .setExpiration(new Date(System.currentTimeMillis() + tokenValidity))
                 .signWith(SignatureAlgorithm.HS512,
                         SECRET_KEY.getBytes()).compact();
     }
