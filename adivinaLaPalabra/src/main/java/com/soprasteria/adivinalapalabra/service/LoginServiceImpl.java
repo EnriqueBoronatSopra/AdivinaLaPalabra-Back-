@@ -35,8 +35,9 @@ public class LoginServiceImpl implements LoginService {
 
         return Jwts.builder()
                 .setSubject(user.get().getName())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + tokenValidity))
-                .signWith(SignatureAlgorithm.HS512,
+                .signWith(SignatureAlgorithm.HS256,
                         SECRET_KEY.getBytes()).compact();
     }
 }
