@@ -4,9 +4,22 @@ spring:
     url: jdbc:mysql://localhost:3306/adivinalapalabra
     username: root
     password: mysql
+    initialization-mode: always
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:sql/data.sql
   jpa:
+    show-sql: true
+    defer-datasource-initialization: true
     hibernate:
-     ddlAuto: update
+      ddl-auto: update
+  output:
+    ansi:
+      enabled: always
+  properties:
+    hibernate:
+      format_slq: true
 jwt:
   secret: "T4k3_Up23"
   expiration: 900000
