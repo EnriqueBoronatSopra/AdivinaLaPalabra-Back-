@@ -20,7 +20,6 @@ public class RoundEntity {
     @JoinColumn(name = "idUser")
     @ToString.Exclude
     private UserEntity user;
-
     public void incrementIntentInOne() {
         intentNumber++;
     }
