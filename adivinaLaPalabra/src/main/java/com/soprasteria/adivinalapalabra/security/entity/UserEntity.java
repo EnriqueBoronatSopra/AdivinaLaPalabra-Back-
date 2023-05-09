@@ -1,5 +1,6 @@
-package com.soprasteria.adivinalapalabra.model;
+package com.soprasteria.adivinalapalabra.security.entity;
 
+import com.soprasteria.adivinalapalabra.model.RoundEntity;
 import com.soprasteria.adivinalapalabra.utils.ErrorMsgs;
 import jakarta.persistence.*;
 import lombok.Data;

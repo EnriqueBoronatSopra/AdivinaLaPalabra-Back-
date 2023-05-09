@@ -1,7 +1,11 @@
 package com.soprasteria.adivinalapalabra.service;
 
-import com.soprasteria.adivinalapalabra.dto.LoginRequest;
+import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
+
+import java.util.Optional;
 
 public interface LoginService {
-    String login(LoginRequest loginRequest);
+    Optional<UserEntity> login(String name);
+
+    boolean existByName(String name);
 }

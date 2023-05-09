@@ -7,4 +7,6 @@ spring:
   jpa:
     hibernate:
      ddlAuto: update
-
+jwt:
+  secret: "T4k3_Up23"
+  expiration: 900000
