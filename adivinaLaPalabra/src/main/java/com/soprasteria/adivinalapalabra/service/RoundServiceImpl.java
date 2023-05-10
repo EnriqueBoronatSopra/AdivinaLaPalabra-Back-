@@ -4,7 +4,11 @@ import com.soprasteria.adivinalapalabra.repository.WordsRepository;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.model.RoundEntity;
 import com.soprasteria.adivinalapalabra.repository.RoundRepository;
+import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
+import com.soprasteria.adivinalapalabra.security.jwt.JWTProvider;
+import com.soprasteria.adivinalapalabra.security.jwt.JWTTokenFilter;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +29,13 @@ public class RoundServiceImpl implements RoundService {
     private RoundRepository roundRepository;
 
     @Override
-    public RoundResponse newRound() {
+    public RoundResponse newRound(UserEntity userEntity) {
         String wordToGuess = wordsRepository.getRandomWord();
 
         RoundEntity roundEntity = new RoundEntity();
         roundEntity.setWord(wordToGuess);
         roundEntity.setIntentNumber(0);
+        roundEntity.setUser(userEntity);
 
         try {
             RoundEntity savedRoundEntity = roundRepository.save(roundEntity);

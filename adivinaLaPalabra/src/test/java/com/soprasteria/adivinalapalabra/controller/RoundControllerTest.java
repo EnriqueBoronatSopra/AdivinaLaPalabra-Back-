@@ -5,8 +5,11 @@ import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
 import com.soprasteria.adivinalapalabra.model.RoundEntity;
 import com.soprasteria.adivinalapalabra.repository.RoundRepository;
+import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
+import com.soprasteria.adivinalapalabra.security.service.LoginServiceImpl;
 import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
 import com.soprasteria.adivinalapalabra.service.WordServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -37,29 +40,36 @@ class RoundControllerTest {
     @Mock
     private RoundRepository roundRepository;
 
+    @Mock
+    private LoginServiceImpl loginService;
+
     @InjectMocks
     private RoundController roundController;
+
+    private UserEntity userEntity = new UserEntity();
 
     @Test
     void returnIdTheNewRound() {
         RoundResponse roundResponseExpected = new RoundResponse();
         final Long id = 3L;
         roundResponseExpected.setId(id);
-        when(roundService.newRound()).thenReturn(roundResponseExpected);
+        when(roundService.newRound(any())).thenReturn(roundResponseExpected);
+        when(loginService.getUserFromToken(any())).thenReturn(userEntity);
 
         ResponseEntity<RoundResponse> responseEntityExpected = ResponseEntity.ok(roundResponseExpected);
 
-        assertEquals(responseEntityExpected, roundController.newRound());
+        assertEquals(responseEntityExpected, roundController.newRound(any()));
     }
 
     @Test
     void returnIdNull(){
-        when(roundService.newRound()).thenReturn(null);
+        when(roundService.newRound(any())).thenReturn(null);
+        when(loginService.getUserFromToken(any())).thenReturn(userEntity);
 
         ResponseEntity<RoundResponse> responseEntityExpected =
                 new ResponseEntity<>(null, HttpStatus.UNPROCESSABLE_ENTITY);
 
-        assertEquals(responseEntityExpected, roundController.newRound());
+        assertEquals(responseEntityExpected, roundController.newRound(any()));
     }
 
     @Test
