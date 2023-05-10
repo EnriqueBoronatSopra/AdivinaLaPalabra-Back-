@@ -68,7 +68,7 @@ public class JWTProvider {
     }
 
     private Key getSecret(String secret) {
-        byte[] secretBytes = Decoders.BASE64.decode(secret);
+        byte[] secretBytes = Decoders.BASE64URL.decode(secret);
 
         return Keys.hmacShaKeyFor(secretBytes);
     }

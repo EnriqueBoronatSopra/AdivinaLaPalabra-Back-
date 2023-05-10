@@ -1,4 +1,4 @@
-package com.soprasteria.adivinalapalabra.service;
+package com.soprasteria.adivinalapalabra.security.service;
 
 import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import com.soprasteria.adivinalapalabra.security.repository.UserRepository;
@@ -18,11 +18,4 @@ public class LoginServiceImpl implements LoginService {
     public Optional<UserEntity> login(String name) throws UsernameNotFoundException {
         return userRepository.findByName(name);
     }
-
-    @Override
-    public boolean existByName(String name) {
-        return userRepository.existByName(name);
-    }
-
-
 }

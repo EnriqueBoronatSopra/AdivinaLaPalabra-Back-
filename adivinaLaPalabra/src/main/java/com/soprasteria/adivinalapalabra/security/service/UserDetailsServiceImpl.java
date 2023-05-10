@@ -2,7 +2,6 @@ package com.soprasteria.adivinalapalabra.security.service;
 
 import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import com.soprasteria.adivinalapalabra.security.entity.UserDetailsImpl;
-import com.soprasteria.adivinalapalabra.service.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
