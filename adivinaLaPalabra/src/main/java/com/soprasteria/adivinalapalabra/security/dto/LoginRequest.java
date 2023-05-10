@@ -1,4 +1,4 @@
-package com.soprasteria.adivinalapalabra.dto;
+package com.soprasteria.adivinalapalabra.security.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,11 @@
-package com.soprasteria.adivinalapalabra.model;
+package com.soprasteria.adivinalapalabra.security.entity;
 
+import com.soprasteria.adivinalapalabra.model.RoundEntity;
+import com.soprasteria.adivinalapalabra.utils.ErrorMsgs;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
+import javax.naming.Context;
 import java.util.List;
 
 @Data
@@ -19,4 +22,9 @@ public class UserEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private List<RoundEntity> listRound;
+    
+
+
+
+
 }

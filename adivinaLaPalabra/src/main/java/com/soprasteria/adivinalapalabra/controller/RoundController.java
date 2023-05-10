@@ -3,9 +3,13 @@ package com.soprasteria.adivinalapalabra.controller;
 import com.soprasteria.adivinalapalabra.configuration.GameConfiguration;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
+import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
+import com.soprasteria.adivinalapalabra.security.jwt.JWTTokenFilter;
+import com.soprasteria.adivinalapalabra.security.service.LoginServiceImpl;
 import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
 import com.soprasteria.adivinalapalabra.service.WordServiceImpl;
 import com.soprasteria.adivinalapalabra.utils.ErrorMsgs;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +28,16 @@ public class RoundController {
     @Autowired
     private WordServiceImpl wordService;
 
+    @Autowired
+    private LoginServiceImpl loginService;
+
+
+
     @PostMapping
-    public ResponseEntity<RoundResponse> newRound() {
-        RoundResponse roundResponse = roundService.newRound();
+    public ResponseEntity<RoundResponse> newRound(HttpServletRequest httpServletRequest) {
+
+        UserEntity user = loginService.getUserFromToken(httpServletRequest);
+        RoundResponse roundResponse = roundService.newRound(user);
         return roundResponse != null ? ResponseEntity.ok(roundResponse) :
                 new ResponseEntity<>(roundResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }

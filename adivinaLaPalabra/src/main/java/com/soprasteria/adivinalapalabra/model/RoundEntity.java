@@ -1,9 +1,9 @@
 package com.soprasteria.adivinalapalabra.model;
 
+import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
-import org.apache.catalina.User;
 
 @Data
 @Entity
@@ -20,6 +20,7 @@ public class RoundEntity {
     @JoinColumn(name = "idUser")
     @ToString.Exclude
     private UserEntity user;
+
     public void incrementIntentInOne() {
         intentNumber++;
     }

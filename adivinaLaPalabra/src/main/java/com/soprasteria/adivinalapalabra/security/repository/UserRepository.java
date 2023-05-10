@@ -1,6 +1,6 @@
-package com.soprasteria.adivinalapalabra.repository;
+package com.soprasteria.adivinalapalabra.security.repository;
 
-import com.soprasteria.adivinalapalabra.model.UserEntity;
+import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
