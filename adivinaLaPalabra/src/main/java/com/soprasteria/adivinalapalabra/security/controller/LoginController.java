@@ -3,6 +3,8 @@ package com.soprasteria.adivinalapalabra.security.controller;
 import com.soprasteria.adivinalapalabra.security.dto.JwtDto;
 import com.soprasteria.adivinalapalabra.security.dto.LoginRequest;
 import com.soprasteria.adivinalapalabra.security.jwt.JWTProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +23,8 @@ public class LoginController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    private final static Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @Autowired
     JWTProvider jwtProvider;
 
@@ -38,7 +42,12 @@ public class LoginController {
     }
 
     private String decodedString(String encodedString) {
-        byte[] stringDecodedBytes = Base64.getDecoder().decode(encodedString);
-        return new String(stringDecodedBytes);
+        try {
+            byte[] stringDecodedBytes = Base64.getDecoder().decode(encodedString);
+            return new String(stringDecodedBytes);
+        } catch (IllegalArgumentException exception) {
+            logger.error("Error with bytes received");
+        }
+        return null;
     }
 }
