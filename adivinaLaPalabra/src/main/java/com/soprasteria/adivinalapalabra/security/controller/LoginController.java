@@ -26,12 +26,8 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<JwtDto> login(@RequestBody LoginRequest loginRequest) {
-        String nameEncoded = loginRequest.getName();
-        String passwordEncoded = loginRequest.getPassword();
-        byte[] nameDecodedBytes = Base64.getDecoder().decode(nameEncoded);
-        byte[] passwordDecodedBytes = Base64.getDecoder().decode(passwordEncoded);
-        String name = new String(nameDecodedBytes);
-        String password = new String(passwordDecodedBytes);
+        String name = decodedString(loginRequest.getName());
+        String password = decodedString(loginRequest.getPassword());
         Authentication authentication =
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(name, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -39,5 +35,10 @@ public class LoginController {
         JwtDto jwtDto = new JwtDto(jwt);
 
         return ResponseEntity.ok(jwtDto);
+    }
+
+    private String decodedString(String encodedString) {
+        byte[] stringDecodedBytes = Base64.getDecoder().decode(encodedString);
+        return new String(stringDecodedBytes);
     }
 }
