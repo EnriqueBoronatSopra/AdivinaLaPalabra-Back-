@@ -4,6 +4,13 @@ import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.Timer;
 
 @Data
 @Entity
@@ -15,6 +22,7 @@ public class RoundEntity {
     private Long id;
     private String word;
     private int intentNumber;
+    private LocalDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name = "idUser")
@@ -24,5 +32,12 @@ public class RoundEntity {
     public void incrementIntentInOne() {
         intentNumber++;
     }
+    public void dateTimeNow() {
+        dateTime = LocalDateTime.now();
+    }
+
+
+
+
 
 }
