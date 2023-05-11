@@ -15,4 +15,6 @@ public interface RoundService {
     RoundResponse parseRound(RoundEntity roundEntity);
 
     int updateIntentNumber(long id);
+
+    void setRoundWin(long id);
 }
