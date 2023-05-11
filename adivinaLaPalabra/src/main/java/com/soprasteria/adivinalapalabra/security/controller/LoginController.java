@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/login")
@@ -24,8 +26,12 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<JwtDto> login(@RequestBody LoginRequest loginRequest) {
-        String name = loginRequest.getName();
-        String password = loginRequest.getPassword();
+        String nameEncoded = loginRequest.getName();
+        String passwordEncoded = loginRequest.getPassword();
+        byte[] nameDecodedBytes = Base64.getDecoder().decode(nameEncoded);
+        byte[] passwordDecodedBytes = Base64.getDecoder().decode(passwordEncoded);
+        String name = new String(nameDecodedBytes);
+        String password = new String(passwordDecodedBytes);
         Authentication authentication =
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(name, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
