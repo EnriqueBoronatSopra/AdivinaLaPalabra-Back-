@@ -4,13 +4,7 @@ import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
-import java.util.Timer;
 
 @Data
 @Entity
@@ -23,6 +17,7 @@ public class RoundEntity {
     private String word;
     private int intentNumber;
     private LocalDateTime dateTime;
+    private Boolean roundWin;
 
     @ManyToOne
     @JoinColumn(name = "idUser")
@@ -36,8 +31,7 @@ public class RoundEntity {
         dateTime = LocalDateTime.now();
     }
 
-
-
-
-
+    public void isRoundWin() {
+        roundWin = true;
+    }
 }

@@ -5,10 +5,7 @@ import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.model.RoundEntity;
 import com.soprasteria.adivinalapalabra.repository.RoundRepository;
 import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
-import com.soprasteria.adivinalapalabra.security.jwt.JWTProvider;
-import com.soprasteria.adivinalapalabra.security.jwt.JWTTokenFilter;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +30,7 @@ public class RoundServiceImpl implements RoundService {
         String wordToGuess = wordsRepository.getRandomWord();
 
         RoundEntity roundEntity = new RoundEntity();
+        roundEntity.dateTimeNow();
         roundEntity.setWord(wordToGuess);
         roundEntity.setIntentNumber(0);
         roundEntity.setUser(userEntity);
@@ -76,5 +74,12 @@ public class RoundServiceImpl implements RoundService {
         roundRepository.save(roundEntity);
 
         return roundEntity.getIntentNumber();
+    }
+
+    @Override
+    public void setRoundWin(long id) {
+        RoundEntity roundEntity = roundRepository.getReferenceById(id);
+        roundEntity.isRoundWin();
+        roundRepository.save(roundEntity);
     }
 }

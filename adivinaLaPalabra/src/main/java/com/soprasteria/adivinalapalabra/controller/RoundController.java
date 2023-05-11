@@ -55,6 +55,11 @@ public class RoundController {
         String secretWord = roundResponse.get().getWord();
 
         WordResponse wordResponse = wordService.checkWord(word, secretWord);
+
+        if (wordResponse.isRoundWin()) {
+            roundService.setRoundWin(idRound);
+        }
+
         if (wordResponse.isWordExists()) {
             int roundIntentNumber = roundService.updateIntentNumber(idRound);
 
