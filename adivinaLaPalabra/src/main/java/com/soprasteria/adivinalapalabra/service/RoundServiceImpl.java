@@ -1,5 +1,6 @@
 package com.soprasteria.adivinalapalabra.service;
 
+import com.soprasteria.adivinalapalabra.dto.HistoricalResponse;
 import com.soprasteria.adivinalapalabra.repository.WordsRepository;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.model.RoundEntity;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,6 +58,14 @@ public class RoundServiceImpl implements RoundService {
             logger.error("Entity not found");
             return Optional.empty();
         }
+    }
+
+    @Override
+    public HistoricalResponse lastTenRounds(UserEntity userEntity) {
+        return new HistoricalResponse(roundRepository.findByUser(userEntity).stream()
+                .sorted(Comparator.comparing(RoundEntity::getDateTime).reversed())
+                .limit(10)
+                .toList());
     }
 
     @Override

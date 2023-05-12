@@ -1,10 +1,10 @@
 package com.soprasteria.adivinalapalabra.controller;
 
 import com.soprasteria.adivinalapalabra.configuration.GameConfiguration;
+import com.soprasteria.adivinalapalabra.dto.HistoricalResponse;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
 import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
-import com.soprasteria.adivinalapalabra.security.jwt.JWTTokenFilter;
 import com.soprasteria.adivinalapalabra.security.service.LoginServiceImpl;
 import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
 import com.soprasteria.adivinalapalabra.service.WordServiceImpl;
@@ -71,5 +71,13 @@ public class RoundController {
         }
         
         return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/historical")
+    public ResponseEntity<HistoricalResponse> historicalRounds(HttpServletRequest httpServletRequest) {
+        UserEntity user = loginService.getUserFromToken(httpServletRequest);
+        HistoricalResponse historicalResponse = roundService.lastTenRounds(user);
+        return historicalResponse != null ? ResponseEntity.ok(historicalResponse) :
+                new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }
