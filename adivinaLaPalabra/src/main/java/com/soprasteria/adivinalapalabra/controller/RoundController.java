@@ -3,8 +3,8 @@ package com.soprasteria.adivinalapalabra.controller;
 import com.soprasteria.adivinalapalabra.configuration.GameConfiguration;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
+import com.soprasteria.adivinalapalabra.model.RoundEntity;
 import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
-import com.soprasteria.adivinalapalabra.security.jwt.JWTTokenFilter;
 import com.soprasteria.adivinalapalabra.security.service.LoginServiceImpl;
 import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
 import com.soprasteria.adivinalapalabra.service.WordServiceImpl;
@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -71,5 +72,15 @@ public class RoundController {
         }
         
         return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<RoundEntity>> find(HttpServletRequest httpServletRequest) {
+        UserEntity user = loginService.getUserFromToken(httpServletRequest);
+        List<RoundEntity> listRounds = roundService.all(user).stream()
+                                                                .limit(10)
+                                                                .toList();
+        return !listRounds.isEmpty() ? ResponseEntity.ok(listRounds) :
+                new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }
