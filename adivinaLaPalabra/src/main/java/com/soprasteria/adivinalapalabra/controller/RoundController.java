@@ -75,7 +75,7 @@ public class RoundController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RoundEntity>> lastTen(HttpServletRequest httpServletRequest) {
+    public ResponseEntity<List<RoundEntity>> find(HttpServletRequest httpServletRequest) {
         UserEntity user = loginService.getUserFromToken(httpServletRequest);
         List<RoundEntity> listRounds = roundService.all(user).stream()
                                                                 .limit(10)
