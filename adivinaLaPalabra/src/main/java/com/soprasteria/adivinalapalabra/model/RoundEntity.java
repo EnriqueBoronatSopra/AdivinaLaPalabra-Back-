@@ -1,5 +1,6 @@
 package com.soprasteria.adivinalapalabra.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class RoundEntity {
     @ManyToOne
     @JoinColumn(name = "idUser")
     @ToString.Exclude
+    @JsonIgnore
     private UserEntity user;
 
     public void incrementIntentInOne() {

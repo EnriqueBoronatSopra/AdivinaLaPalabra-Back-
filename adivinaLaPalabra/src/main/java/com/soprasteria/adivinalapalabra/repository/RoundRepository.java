@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RoundRepository extends JpaRepository<RoundEntity, Long> {
-    List<RoundEntity> findByUser(UserEntity user);
+    List<RoundEntity> findAllByUser(UserEntity user);
 }

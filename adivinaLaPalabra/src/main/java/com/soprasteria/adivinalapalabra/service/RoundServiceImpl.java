@@ -1,6 +1,5 @@
 package com.soprasteria.adivinalapalabra.service;
 
-import com.soprasteria.adivinalapalabra.dto.HistoricalResponse;
 import com.soprasteria.adivinalapalabra.repository.WordsRepository;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.model.RoundEntity;
@@ -61,11 +60,10 @@ public class RoundServiceImpl implements RoundService {
     }
 
     @Override
-    public HistoricalResponse lastTenRounds(UserEntity userEntity) {
-        return new HistoricalResponse(roundRepository.findByUser(userEntity).stream()
+    public List<RoundEntity> all(UserEntity userEntity) {
+        return roundRepository.findAllByUser(userEntity).stream()
                 .sorted(Comparator.comparing(RoundEntity::getDateTime).reversed())
-                .limit(10)
-                .toList());
+                .toList();
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.soprasteria.adivinalapalabra.controller;
 
 import com.soprasteria.adivinalapalabra.configuration.GameConfiguration;
-import com.soprasteria.adivinalapalabra.dto.HistoricalResponse;
 import com.soprasteria.adivinalapalabra.dto.RoundResponse;
 import com.soprasteria.adivinalapalabra.dto.WordResponse;
+import com.soprasteria.adivinalapalabra.model.RoundEntity;
 import com.soprasteria.adivinalapalabra.security.entity.UserEntity;
 import com.soprasteria.adivinalapalabra.security.service.LoginServiceImpl;
 import com.soprasteria.adivinalapalabra.service.RoundServiceImpl;
@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -73,11 +74,13 @@ public class RoundController {
         return new ResponseEntity<>(wordResponse, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/historical")
-    public ResponseEntity<HistoricalResponse> historicalRounds(HttpServletRequest httpServletRequest) {
+    @GetMapping
+    public ResponseEntity<List<RoundEntity>> lastTen(HttpServletRequest httpServletRequest) {
         UserEntity user = loginService.getUserFromToken(httpServletRequest);
-        HistoricalResponse historicalResponse = roundService.lastTenRounds(user);
-        return historicalResponse != null ? ResponseEntity.ok(historicalResponse) :
+        List<RoundEntity> listRounds = roundService.all(user).stream()
+                                                                .limit(10)
+                                                                .toList();
+        return !listRounds.isEmpty() ? ResponseEntity.ok(listRounds) :
                 new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }
